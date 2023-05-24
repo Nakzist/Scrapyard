@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4879593476874991215}
   - component: {fileID: 4879593476874991200}
   m_Layer: 3
-  m_Name: "Krali\xE7e"
+  m_Name: Queen
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
