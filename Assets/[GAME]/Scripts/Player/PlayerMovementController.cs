@@ -24,6 +24,7 @@ namespace _GAME_.Scripts.Player
         private Rigidbody _rb;
         
         private PlayerMovementDataScriptableObject _playerMovementData;
+        private PlayerInputHandler _playerInputHandler;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace _GAME_.Scripts.Player
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _rb = GetComponent<Rigidbody>();
+            _playerInputHandler = GetComponent<PlayerInputHandler>();
             _mainCamera = Camera.main;
             if (_mainCamera != null) _mainCamera.transform.rotation = transform.rotation;
         }
@@ -50,13 +52,13 @@ namespace _GAME_.Scripts.Player
         private void FixedUpdate()
         {
             transform.Rotate(
-                new Vector3(0f, PlayerInputHandler.Instance.HorizontalLookInput,
+                new Vector3(0f, _playerInputHandler.HorizontalLookInput,
                     0f), Space.Self);
         }
 
         private void LateUpdate()
         {
-            _cameraVerticalAngle -= PlayerInputHandler.Instance.VerticalLookInput;
+            _cameraVerticalAngle -= _playerInputHandler.VerticalLookInput;
             _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -89f, 89f);
             var cameraTransform = _mainCamera.transform;
             cameraTransform.eulerAngles = new Vector3(_cameraVerticalAngle, cameraTransform.eulerAngles.y, 0);
@@ -81,9 +83,9 @@ namespace _GAME_.Scripts.Player
         private void MovePlayer()
         {
             var t = transform;
-            var playerMovement = t.forward * PlayerInputHandler.Instance.VerticalMovement +
-                                 t.right * PlayerInputHandler.Instance.HorizontalMovement;
-            playerMovement *= PlayerInputHandler.Instance.IsSprinting ? _sprintMoveSpeed : _moveSpeed;
+            var playerMovement = t.forward * _playerInputHandler.VerticalMovement +
+                                 t.right * _playerInputHandler.HorizontalMovement;
+            playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed;
             playerMovement.y += _rb.velocity.y;
             _rb.velocity = playerMovement;
         }
@@ -92,9 +94,8 @@ namespace _GAME_.Scripts.Player
         {
             // ReSharper disable once Unity.PreferNonAllocApi
             _isGrounded = Physics.OverlapSphere(transform.position, .1f, _groundMask).Length != 0;
-            if (_isGrounded && PlayerInputHandler.Instance.IsJumping)
+            if (_isGrounded && _playerInputHandler.IsJumping)
             {
-                Debug.Log("jump");
                 _rb.AddForce(transform.up * _jumpForce, ForceMode.Impulse);
             }
         }

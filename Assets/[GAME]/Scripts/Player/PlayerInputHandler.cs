@@ -6,8 +6,7 @@ namespace _GAME_.Scripts.Player
     public class PlayerInputHandler : MonoBehaviour
     {
         #region Public Variables
-
-        public static PlayerInputHandler Instance { get; private set; }
+        
         public float HorizontalMovement => Input.GetAxisRaw("Horizontal");
         public float VerticalMovement => Input.GetAxisRaw("Vertical");
         public float HorizontalLookInput => Input.GetAxisRaw("Mouse X") * horizontalSensitivity;
@@ -19,26 +18,10 @@ namespace _GAME_.Scripts.Player
 
         #endregion
 
-        #region Private Variables
+        #region Serialized Variables
 
-        [FormerlySerializedAs("_horizontalsensitivity")] [SerializeField] private float horizontalSensitivity;
-        [FormerlySerializedAs("_verticalsensitivity")] [SerializeField] private float verticalSensitivity;
-
-        #endregion
-        
-        #region Monobehavious Methods
-
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-            }
-        }
+        [SerializeField] private float horizontalSensitivity;
+        [SerializeField] private float verticalSensitivity;
 
         #endregion
     }

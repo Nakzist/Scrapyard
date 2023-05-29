@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
@@ -13,12 +14,13 @@ namespace _GAME_.Scripts.Player
         #region Serialized Variables
         
         [SerializeField] private Transform bulletSpawnPoint;
+        [SerializeField] private bool drawAttackRange;
+        [SerializeField] private Vector3 attackRange;
 
         #endregion
 
         #region Private Variables
-
-        [Header("Weapon")]
+        
         private float _delayBetweenShots;
         private float _weaponDamage;
         private float _meleeDamage;
@@ -35,6 +37,10 @@ namespace _GAME_.Scripts.Player
         private PlayerWeaponDataScriptableObject _playerWeaponData;
         
         private Camera _mainCamera;
+        
+        private PlayerInputHandler _playerInputHandler;
+        
+        private Transform AttackRangeTransform => transform.GetChild(2);
 
         #endregion
 
@@ -45,12 +51,22 @@ namespace _GAME_.Scripts.Player
             GetDataFromScriptable();
             
             _mainCamera = Camera.main;
+            _playerInputHandler = GetComponent<PlayerInputHandler>();
         }
 
         private void Update()
         {
             HandleShooting();
             HandleMeleeAttack();
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (drawAttackRange)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(AttackRangeTransform.position, attackRange);
+            }
         }
 
         #endregion
@@ -73,7 +89,7 @@ namespace _GAME_.Scripts.Player
         
         private void HandleShooting()
         {
-            if (PlayerInputHandler.Instance.IsFiring)
+            if (_playerInputHandler.IsFiring)
             {
                 if (_lastTimeShot + _delayBetweenShots < Time.time)
                 {
@@ -103,24 +119,28 @@ namespace _GAME_.Scripts.Player
                 
         private void HandleMeleeAttack()
         {
-            if (PlayerInputHandler.Instance.IsMeleeAttacking && _canMeleeAttack)
+            if (_playerInputHandler.IsMeleeAttacking && _canMeleeAttack)
             {
                 StartCoroutine(MeleeAttack());
             }
         }
         
+        // ReSharper disable Unity.PerformanceAnalysis
         private IEnumerator MeleeAttack()
         {
             Debug.Log("Melee Attacking");
             _canMeleeAttack = false;
-            foreach (var enemy in InAttackRange.EnemiesInAttackRange)
+            // ReSharper disable once Unity.PreferNonAllocApi
+            var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, Quaternion.identity, _hittableMask,
+                QueryTriggerInteraction.Collide);
+
+            foreach (var enemy in colliders)
             {
                 if (enemy.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.TakeDamage(_meleeDamage);
                 }
             }
-            InAttackRange.EnemiesInAttackRange = new List<GameObject>();
             yield return new WaitForSeconds(4f);
             _canMeleeAttack = true;
         }

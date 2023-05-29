@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aac0f08917224577a366ba8bce17f077, type: 3}
-  m_Name: PlayerWeaponData
+  m_Name: Player Weapon Data
   m_EditorClassIdentifier: 
   delayBetweenShoots: 0.25
   weaponDamage: 5
   meleeDamage: 25
-  range: 80
+  weaponRange: 80
   bulletSpeed: 25
-  bullet: {fileID: 0}
+  bulletPrefab: {fileID: 3330332147044356073, guid: 1bd4f0e1ab157054dbb7f3ca4c8be55e, type: 3}
   maxAmmo: 10
+  hittableLayerMask:
+    serializedVersion: 2
+    m_Bits: 72

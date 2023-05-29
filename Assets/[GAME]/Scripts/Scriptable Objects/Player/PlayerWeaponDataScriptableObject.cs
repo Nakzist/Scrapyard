@@ -2,7 +2,7 @@
 
 namespace _GAME_.Scripts.Scriptable_Objects.Player
 {
-    [CreateAssetMenu(fileName = "PlayerWeaponData", menuName = "Scrapyard/Data/Player Weapon Data")]
+    [CreateAssetMenu(fileName = "Player Weapon Data", menuName = "Scrapyard/Data/Player/Player Weapon Data")]
     public class PlayerWeaponDataScriptableObject : ScriptableObject
     {
         #region Serialized Variables

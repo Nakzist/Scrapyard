@@ -1,10 +1,11 @@
 ﻿using _GAME_.Scripts.Interfaces;
+using _GAME_.Scripts.Observer;
 using UnityEngine;
 
 namespace _GAME_.Scripts.Enemy
 {
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class BaseOldEnemy : MonoBehaviour, IDamageable
+    public abstract class BaseOldEnemy : ObserverBase, IDamageable
     {
         [SerializeField] private protected float range = 1f;
         [SerializeField] private protected float damage = 5f;
