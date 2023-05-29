@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.Enemy
 {
-    public class ExplodingEnemy : BaseEnemy
+    public class ExplodingOldEnemy : BaseOldEnemy
     {
         [SerializeField] private GameObject areaPrefab;
 

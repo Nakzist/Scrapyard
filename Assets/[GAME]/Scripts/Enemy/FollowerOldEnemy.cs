@@ -6,7 +6,7 @@ using UnityEngine;
 namespace _GAME_.Scripts.Enemy
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class FollowerEnemy : BaseEnemy
+    public class FollowerOldEnemy : BaseOldEnemy
     {
         private Vector3 _velocity;
         public bool isQueen;
