@@ -1,0 +1,95 @@
+﻿using System.Collections.Generic;
+using _GAME_.Scripts.GlobalVariables;
+using _GAME_.Scripts.Managers;
+using _GAME_.Scripts.Observer;
+using _GAME_.Scripts.Scriptable_Objects.Player;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _GAME_.Scripts.Player
+{
+    public class PlayerHudController : ObserverBase
+    {
+        #region Private Variables
+
+        private GameObject _hudInstance;
+        private TextMeshProUGUI _winConditionText;
+        private TextMeshProUGUI _hpText;
+        private GameObject _losePanel;
+        private List<Sprite> _waveSprites;
+
+        private PlayerHudDataScriptableObject _playerHudDataScriptableObject;
+
+        #endregion
+
+        #region Monobehaviour Methods
+
+        private void Start()
+        {
+            GetReferences();
+        }
+
+        private void OnEnable()
+        {
+            Register(CustomEvents.OnPlayerDeath, ShowLosePanel);
+            Register(CustomEvents.OnHealthChanged, ShowHp);
+        }
+
+        private void OnDisable()
+        {
+            Unregister(CustomEvents.OnPlayerDeath, ShowLosePanel);
+            Unregister(CustomEvents.OnHealthChanged, ShowHp);
+        }
+
+        #endregion
+        
+        #region Public Methods
+        
+        public void UpdateWinConditionText(string text)
+        {
+            _winConditionText.text = text;
+        }
+        
+        #endregion
+
+        #region Private Methods
+
+        private void GetReferences()
+        {
+            _playerHudDataScriptableObject = Resources.Load<PlayerHudDataScriptableObject>(FolderPaths.HUD_DATA_PATH);
+            _waveSprites = _playerHudDataScriptableObject.WaveSprites;
+            _hudInstance = Instantiate(_playerHudDataScriptableObject.HudPrefab);
+            
+            _winConditionText = _hudInstance.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+            _hpText = _hudInstance.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+            
+            _losePanel = _hudInstance.transform.GetChild(0).GetChild(4).gameObject;
+
+            var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
+            image.sprite = _waveSprites[GameManager.Instance.currentLevel];
+            image.gameObject.SetActive(true);
+        }
+
+        private void ShowLosePanel()
+        {
+            _losePanel.SetActive(true);
+        }
+
+        private void ShowHp()
+        {
+            if (GameManager.Instance.currentPlayer == null)
+            {
+                _hpText.text = "100";
+            }
+            else
+            {
+                var currentHealth = GameManager.Instance.currentPlayer.PlayerHealthManager.Health;
+                _hpText.text = currentHealth.ToString("F0");
+            }
+        }
+
+        #endregion
+        
+    }
+}

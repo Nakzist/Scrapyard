@@ -1,44 +1,34 @@
-using System;
 using System.Collections.Generic;
-using _GAME_.Scripts.Enums;
-using TMPro;
+using _GAME_.Scripts.GlobalVariables;
+using _GAME_.Scripts.Observer;
+using _GAME_.Scripts.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 namespace _GAME_.Scripts.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : ObserverBase
     {
-        #region Public Variables
+        #region Public Static Variables
 
-        public static List<GameObject> AliveEnemies;
-        public static Action OnEnemyDied;
-        public static Action OnPlayerDied;
-        public static Action OnQueenDied;
-        public static Action<float> OnHealthChanged;
-        public static float Score;
+        public static GameManager Instance{get; private set;}
+
+        [HideInInspector] public float score;
 
         #endregion
-        
-        #region Serialized Variables
 
-        [FormerlySerializedAs("_spawnPoints")] [SerializeField] private List<Transform> spawnPoints;
-        [FormerlySerializedAs("_enemiesToSpawn")] [SerializeField] private List<GameObject> enemiesToSpawn;
-        [FormerlySerializedAs("_spawnRate")] [SerializeField] private float spawnRate;
-        [FormerlySerializedAs("_timeToSurvive")] [SerializeField] private float timeToSurvive;
-        [SerializeField] private float winScore;
-        [FormerlySerializedAs("_winCondition")] [SerializeField] private WinConditions winCondition;
-        [SerializeField] private TextMeshProUGUI winConditionText;
-        [SerializeField] private TextMeshProUGUI hpText;
-        [SerializeField] private GameObject losePanel;
+        #region Public Variables
+        
+        [HideInInspector] public List<GameObject> aliveEnemies;
+        [HideInInspector] public PlayerController currentPlayer;
+        [HideInInspector] public int currentLevel;
 
         #endregion
 
         #region Private Variables
 
         private float _lastSpawnTime;
+        private int _currentLevel;
 
         #endregion
         
@@ -46,42 +36,30 @@ namespace _GAME_.Scripts.Managers
 
         private void Awake()
         {
-            AliveEnemies = new List<GameObject>();
-            Score = 0;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+            
+            aliveEnemies = new List<GameObject>();
+            score = 0;
             Time.timeScale = 1;
         }
 
-        private void Update()
-        {
-            if (enemiesToSpawn.Count >0)
-            {
-                SpawnEnemy();
-            }
-            if (winCondition == WinConditions.Time)
-            {
-                timeToSurvive -= Time.deltaTime;
-                winConditionText.text = Mathf.Ceil(timeToSurvive) + " seconds left to win";
-                if (timeToSurvive <= 0)
-                {
-                    Win();
-                }
-            }
-        }
-        
         private void OnEnable()
         {
-            OnEnemyDied += IncreaseScore;
-            OnPlayerDied += ShowLosePanel;
-            OnHealthChanged += ShowHP;
-            OnQueenDied += Win;
+            Register(CustomEvents.OnEnemyDeath, IncreaseScore);
+            Register(CustomEvents.OnQueenDeath, Win);
         }
         
         private void OnDisable()
         {
-            OnEnemyDied -= IncreaseScore;
-            OnPlayerDied -= ShowLosePanel;
-            OnHealthChanged -= ShowHP;
-            OnQueenDied -= Win;
+            Unregister(CustomEvents.OnEnemyDeath, IncreaseScore);
+            Unregister(CustomEvents.OnQueenDeath, Win);
         }
 
         #endregion
@@ -102,44 +80,16 @@ namespace _GAME_.Scripts.Managers
 
         #region Private Methods
 
-        private void SpawnEnemy()
-        {
-            if (_lastSpawnTime + 1/spawnRate <= Time.time)
-            {
-                _lastSpawnTime = Time.time;
-                var spawnPointIndex = Random.Range(0, spawnPoints.Count);
-                var enemyIndex = Random.Range(0, enemiesToSpawn.Count);
-                var enemy = Instantiate(enemiesToSpawn[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
-                if (enemy != null) AliveEnemies.Add(enemy);
-            }
-        }
-
         private void IncreaseScore()
         {
-            Score++;
-            if (winCondition == WinConditions.Score)
-            {
-                winConditionText.text = $"{Score} / {winScore}";
-            }
-            if (Score >= winScore)
-            {
-                Win();
-            }
+            score++;
+            Push(CustomEvents.IncreaseSCore);
         }
 
-        private void Win()
+        public void Win()
         {
+            _currentLevel++;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-
-        private void ShowLosePanel()
-        {
-            losePanel.SetActive(true);
-        }
-        
-        private void ShowHP(float health)
-        {
-            hpText.text = health.ToString();
         }
 
         #endregion
