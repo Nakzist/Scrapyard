@@ -8,21 +8,19 @@ namespace _GAME_.Scripts.Player
     {
         #region Private Variables
 
-        private PlayerHealthManager _playerHealthManager;
-        private PlayerInputHandler _playerInputHandler;
-        private PlayerMovementController _playerMovementController;
-        private PlayerWeaponController _playerWeaponController;
-        private PlayerHudController _playerHudController;
-
         #endregion
 
         #region Public Variables
 
-        public PlayerHealthManager PlayerHealthManager => _playerHealthManager;
-        public PlayerInputHandler PlayerInputHandler => _playerInputHandler;
-        public PlayerMovementController PlayerMovementController => _playerMovementController;
-        public PlayerWeaponController PlayerWeaponController => _playerWeaponController;
-        public PlayerHudController PlayerHudController => _playerHudController;
+        public PlayerHealthManager PlayerHealthManager { get; private set; }
+
+        public PlayerInputHandler PlayerInputHandler { get; private set; }
+
+        public PlayerMovementController PlayerMovementController { get; private set; }
+
+        public PlayerWeaponController PlayerWeaponController { get; private set; }
+
+        public PlayerHudController PlayerHudController { get; private set; }
 
         #endregion
 
@@ -39,11 +37,11 @@ namespace _GAME_.Scripts.Player
 
         private void GetReferences()
         {
-            _playerHealthManager = GetComponent<PlayerHealthManager>();
-            _playerInputHandler = GetComponent<PlayerInputHandler>();
-            _playerMovementController = GetComponent<PlayerMovementController>();
-            _playerWeaponController = GetComponent<PlayerWeaponController>();
-            _playerHudController = GetComponent<PlayerHudController>();
+            PlayerHealthManager = GetComponent<PlayerHealthManager>();
+            PlayerInputHandler = GetComponent<PlayerInputHandler>();
+            PlayerMovementController = GetComponent<PlayerMovementController>();
+            PlayerWeaponController = GetComponent<PlayerWeaponController>();
+            PlayerHudController = GetComponent<PlayerHudController>();
 
             GameManager.Instance.currentPlayer = this;
         }

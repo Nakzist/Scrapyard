@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponDamage: 5
   meleeDamage: 25
   weaponRange: 80
-  bulletSpeed: 25
+  bulletSpeed: 200
   bulletPrefab: {fileID: 3330332147044356073, guid: 1bd4f0e1ab157054dbb7f3ca4c8be55e, type: 3}
   maxAmmo: 10
   hittableLayerMask:

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Player;
@@ -103,18 +104,21 @@ namespace _GAME_.Scripts.Player
         {
             var currentBullet = Instantiate(this._bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
+            
+            var shootingDirection = _mainCamera.transform.forward;
+            
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out var hit,
                     _weaponRange, _hittableMask))
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    Debug.Log(hit.transform.name);
-                    damageable.TakeDamage(_weaponDamage);
+                    damageable.TakeDamage(_weaponDamage, DamageType.Ranged);
                 }
-
-                currentBullet.GetComponent<Rigidbody>().velocity =
-                    (hit.point - transform.position).normalized * _bulletSpeed;
+                
+                shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
             }
+            
+            currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _bulletSpeed;
         }
                 
         private void HandleMeleeAttack()
@@ -138,7 +142,7 @@ namespace _GAME_.Scripts.Player
             {
                 if (enemy.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_meleeDamage);
+                    damageable.TakeDamage(_meleeDamage, DamageType.Melee);
                 }
             }
             yield return new WaitForSeconds(4f);

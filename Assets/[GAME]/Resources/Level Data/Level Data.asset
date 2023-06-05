@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - enemiesToSpawn:
-    - {fileID: 4879593476874991205, guid: e56ff11f4ec9a3e469b11507503a1894, type: 3}
+    - {fileID: 281248484741969826, guid: a7038b7934eaf6b4aa00816190abe455, type: 3}
     spawnRate: 1
     timeToSurvive: 500
     winScore: 10

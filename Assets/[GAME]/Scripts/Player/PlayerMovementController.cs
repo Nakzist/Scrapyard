@@ -71,8 +71,7 @@ namespace _GAME_.Scripts.Player
         private void GetDataFromScriptable()
         {
             _playerMovementData = Resources.Load<PlayerMovementDataScriptableObject>(FolderPaths.MOVEMENT_DATA_PATH);
-
-
+            
             _moveSpeed = _playerMovementData.MoveSpeed;
             _sprintMoveSpeed = _playerMovementData.SprintMoveSpeed;
             _jumpForce = _playerMovementData.JumpForce;
