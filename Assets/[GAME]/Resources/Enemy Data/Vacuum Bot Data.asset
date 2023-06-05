@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a72019dcd147c18a175afb65f48f88, type: 3}
   m_Name: Vacuum Bot Data
   m_EditorClassIdentifier: 
-  speed: 4
-  angularSpeed: 720
-  acceleration: 8
-  rotationSpeed: 10
-  maxHealth: 100
-  attackRange: 10
+  speed: 20
+  angularSpeed: 1440
+  acceleration: 10
+  rotationSpeed: 60
+  maxHealth: 5
+  attackRange: 3
   damage: 5
+  attackCooldown: 1
+  attackAngle: 60
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128

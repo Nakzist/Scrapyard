@@ -16,6 +16,13 @@ MonoBehaviour:
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
-  maxHealth: 100
-  attackRange: 10
+  maxHealth: 10
+  attackRange: 3
   damage: 5
+  attackCooldown: 1
+  attackAngle: 60
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyToSpawn: 2
+  enemyPrefab: {fileID: 0}

@@ -7,7 +7,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
     {
         #region Serialized Variables
 
-        [Header("Pursuer Bot Combat Settings")]
+        [Header("Vacuum Bot Combat Settings")]
         [SerializeField] private float attackCooldown = 1f;
         [SerializeField] private float attackAngle = 60f;
         [SerializeField] private LayerMask playerLayerMask;
