@@ -7,8 +7,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
     {
         #region Serialized Variables
 
-        [Header("Sniper Bot Movement Settings")] 
-        [SerializeField] private float rotationSpeed = 10f;
+        [Header("Sniper Bot Movement Settings")]
         [SerializeField] private float moveRange = 10f;
 
         [Header("Sniper Bot Combat Settings")] 
@@ -18,8 +17,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
         #endregion
 
         #region Public Variables
-
-        public float RotationSpeed => rotationSpeed;
+        
         public float MoveRange => moveRange;
         public float DelayBetweenShoots => delayBetweenShoots;
         public float DodgeSpeedThreshold => dodgeSpeedThreshold;

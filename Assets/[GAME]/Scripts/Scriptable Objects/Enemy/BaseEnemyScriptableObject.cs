@@ -11,6 +11,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
         [SerializeField] private float speed = 4f;
         [SerializeField] private float angularSpeed = 720f;
         [SerializeField] private float acceleration = 8f;
+        [SerializeField] private float rotationSpeed = 10f;
 
         [Header("Combat Settings")] 
         [SerializeField] private float maxHealth = 100f;
@@ -24,6 +25,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
         public float Speed => speed;
         public float AngularSpeed => angularSpeed;
         public float Acceleration => acceleration;
+        public float RotationSpeed => rotationSpeed;
         
         public float MaxHealth => maxHealth;
         public float AttackRange => attackRange;

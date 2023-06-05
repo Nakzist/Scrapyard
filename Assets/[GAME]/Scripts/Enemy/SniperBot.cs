@@ -21,6 +21,7 @@ namespace _GAME_.Scripts.Enemy
         private float _dodgeSpeedThreshold;
         private bool _isShooting = false;
         private bool _playerDodged = false;
+        private bool _walkingToLocation = false;
 
         #endregion
 
@@ -38,60 +39,73 @@ namespace _GAME_.Scripts.Enemy
 
         #region Override Methods
 
-        protected override BtNodeState Node1()
+        protected override void Node1()
         {
+            Debug.Log("Node1");
             if (!_canShoot)
-                return BtNodeState.Failure;
+                return;
 
             if (_isShooting)
-                return BtNodeState.Failure;
+                return;
 
             if (PlayerDodged())
             {
                 _playerDodged = true;
-                return BtNodeState.Failure;
+                return;
             }
             
             StartCoroutine(ShootDelay());
-            
             StartCoroutine(ShootLaser());
-
-            return BtNodeState.Success;
         }
 
-        protected override BtNodeState Node2()
+        protected override void Node2()
         {
-            var dest = FindLocationWithClearLineOfSight();
-            MoveToDestination(dest);
+            Debug.Log("Node2");
+            if(PlayerTransform == null)
+                return;
+
+            StartCoroutine(WaitForDestination());
             
             RotateTowardsTarget(PlayerTransform, _rotationSpeed);
-
-            return BtNodeState.Success;
         }
 
-        protected override BtNodeState SelectorNode()
+        protected override bool SelectorNode()
         {
-            return HasClearLineOfSight() ? BtNodeState.Success : BtNodeState.Failure;
+            return HasClearLineOfSight();
         }
 
         #endregion
 
         #region Private Methods
+        
+        
+        private IEnumerator WaitForDestination()
+        {
+            if (_walkingToLocation) yield break;
+            
+            _walkingToLocation = true;
+            
+            var dest = FindLocationWithClearLineOfSight();
+            
+            MoveToDestination(dest);
+
+            while (Agent.pathPending || Agent.remainingDistance > Agent.stoppingDistance)
+            {
+                yield return null;
+            }
+
+            _walkingToLocation = false;
+
+        }
 
         private void GetDataFromScriptable()
         {
             var sniperBotData = Resources.Load<SniperBotScriptableObject>(FolderPaths.SNIPER_BOT_DATA_PATH);
             
-            Agent.speed = sniperBotData.Speed;
-            Agent.angularSpeed = sniperBotData.AngularSpeed;
-            Agent.acceleration = sniperBotData.Acceleration;
-
-            MaxHealth = sniperBotData.MaxHealth;
-            CurrentHealth = MaxHealth;
+            GetBaseVariables(sniperBotData);
+            
             _moveRange = sniperBotData.MoveRange;
             _rotationSpeed = sniperBotData.RotationSpeed;
-            Damage = sniperBotData.Damage;
-            AttackRange = sniperBotData.AttackRange;
             _delayBetweenShoots = sniperBotData.DelayBetweenShoots;
             _dodgeSpeedThreshold = sniperBotData.DodgeSpeedThreshold;
         }

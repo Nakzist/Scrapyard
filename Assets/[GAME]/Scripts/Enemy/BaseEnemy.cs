@@ -1,28 +1,30 @@
 ﻿using System.Collections;
-using _GAME_.Scripts.Behaviour_Tree;
 using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
+using _GAME_.Scripts.Scriptable_Objects.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace _GAME_.Scripts.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class BaseEnemy : MonoBehaviour
+    public class BaseEnemy : MonoBehaviour, IDamageable
     {
         #region Private Variables
-
-        private BtNode _behaviourTreeRoot;
 
         private protected NavMeshAgent Agent;
 
         [Header("Enemy Stats")]
-        private protected float CurrentHealth;
-        private protected float MaxHealth;
+        private float _currentHealth;
+        private float _maxHealth;
         private protected float AttackRange;
         private protected float Damage;
+        private protected float RotationSpeed;
 
         private protected Transform PlayerTransform;
+        
+        private Coroutine _behaviorCoroutine;
 
         #endregion
 
@@ -30,8 +32,6 @@ namespace _GAME_.Scripts.Enemy
         
         protected virtual void Start()
         {
-            _behaviourTreeRoot = CreateBehaviourTree();
-
             Agent = GetComponent<NavMeshAgent>();
             
             StartCoroutine(GetPlayer());
@@ -39,11 +39,13 @@ namespace _GAME_.Scripts.Enemy
 
         protected virtual void Update()
         {
-            _behaviourTreeRoot?.Execute();
-            
-            if (_behaviourTreeRoot?.CurrentState is BtNodeState.Success or BtNodeState.Failure)
+            if (SelectorNode())
             {
-                ResetBehaviourTree();
+                Node1();
+            }
+            else
+            {
+                Node2();
             }
         }
 
@@ -51,37 +53,32 @@ namespace _GAME_.Scripts.Enemy
 
         #region Public Methods
 
-        public void ModifyHealth(float amount)
+        public void TakeDamage(float incomingDamage)
         {
-            CurrentHealth += amount;
-
-            if (CurrentHealth <= 0)
-            {
-                // Enemy Death
-            }
+            _currentHealth -= incomingDamage;
+            
+            if(_currentHealth <= 0)
+                Destroy(gameObject);
         }
 
         #endregion
         
         #region Virtual Methods
 
-        protected virtual BtNodeState Node1()
+        protected virtual void Node1()
         {
             // Node 1
-            return BtNodeState.Success;
         }
 
-        protected virtual BtNodeState Node2()
+        protected virtual void Node2()
         {
             // Node 2
-            return BtNodeState.Success;
         }
 
-        protected virtual BtNodeState SelectorNode()
+        protected virtual bool SelectorNode()
         {
             // If true execute node1 else node2
-            var isTrue = (Random.value > 0.5f);
-            return isTrue ? BtNodeState.Success : BtNodeState.Failure;
+            return (Random.value > 0.5f);
         }
         
         #endregion
@@ -100,34 +97,24 @@ namespace _GAME_.Scripts.Enemy
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
         }
 
+        private protected void GetBaseVariables(BaseEnemyScriptableObject data)
+        {
+            Agent.speed = data.Speed;
+            Agent.angularSpeed = data.AngularSpeed;
+            Agent.acceleration = data.Acceleration;
+
+            _maxHealth = data.MaxHealth;
+            _currentHealth = _maxHealth;
+            
+            AttackRange = data.AttackRange;
+            Damage = data.Damage;
+
+            RotationSpeed = data.RotationSpeed;
+        }
+
         #endregion
         
         #region Private Methods
-
-        private BtNode CreateBehaviourTree()
-        {
-            BtSelectorNode rootSelectorNode = new();
-
-            BtSequenceNode detectPlayerSequence = new();
-            detectPlayerSequence.AddChild(new BtLeafNode(SelectorNode));
-
-            BtSequenceNode actionSequence = new();
-            actionSequence.AddChild(new BtLeafNode(Node1));
-            actionSequence.AddChild(new BtLeafNode(Node2));
-
-            BtInverterNode inverterNode = new(actionSequence);
-
-            detectPlayerSequence.AddChild(inverterNode);
-
-            rootSelectorNode.AddChild(detectPlayerSequence);
-
-            return rootSelectorNode;
-        }
-
-        private void ResetBehaviourTree()
-        {
-            _behaviourTreeRoot.Reset();
-        }
         
         private IEnumerator GetPlayer()
         {

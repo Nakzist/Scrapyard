@@ -9,5 +9,6 @@
         public const string LEVEL_DATA_PATH = "Level Data/Level Data";
 
         public const string SNIPER_BOT_DATA_PATH = "Enemy Data/Sniper Bot Data";
+        public const string KAMIKAZE_BOT_DATA_PATH = "Enemy Data/Kamikaze Bot Data";
     }
 }
