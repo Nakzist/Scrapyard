@@ -104,7 +104,6 @@ namespace _GAME_.Scripts.Player
             var currentBullet = Instantiate(this._bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
             
-            // Calculate the shooting direction
             var shootingDirection = _mainCamera.transform.forward;
             
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out var hit,
@@ -112,15 +111,12 @@ namespace _GAME_.Scripts.Player
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    Debug.Log(hit.transform.name);
                     damageable.TakeDamage(_weaponDamage);
                 }
                 
-                // Update the shooting direction based on the hit point
                 shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
             }
             
-            // Apply velocity to the bullet in the shooting direction
             currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _bulletSpeed;
         }
                 
