@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
@@ -13,7 +12,6 @@ namespace _GAME_.Scripts.Enemy
         #region Private Variables
         
         private float _moveRange;
-        private float _rotationSpeed;
         private float _delayBetweenShoots;
         private bool _canShoot = true;
         
@@ -41,11 +39,7 @@ namespace _GAME_.Scripts.Enemy
 
         protected override void Node1()
         {
-            Debug.Log("Node1");
-            if (!_canShoot)
-                return;
-
-            if (_isShooting)
+            if (!_canShoot || _isShooting)
                 return;
 
             if (PlayerDodged())
@@ -60,13 +54,12 @@ namespace _GAME_.Scripts.Enemy
 
         protected override void Node2()
         {
-            Debug.Log("Node2");
             if(PlayerTransform == null)
                 return;
 
             StartCoroutine(WaitForDestination());
             
-            RotateTowardsTarget(PlayerTransform, _rotationSpeed);
+            RotateTowardsTarget(PlayerTransform, RotationSpeed);
         }
 
         protected override bool SelectorNode()
@@ -105,7 +98,6 @@ namespace _GAME_.Scripts.Enemy
             GetBaseVariables(sniperBotData);
             
             _moveRange = sniperBotData.MoveRange;
-            _rotationSpeed = sniperBotData.RotationSpeed;
             _delayBetweenShoots = sniperBotData.DelayBetweenShoots;
             _dodgeSpeedThreshold = sniperBotData.DodgeSpeedThreshold;
         }
@@ -116,8 +108,7 @@ namespace _GAME_.Scripts.Enemy
                 return false;
 
             
-            if (Physics.Raycast(transform.position, PlayerTransform.transform.position - transform.position, out var hit,
-                    AttackRange))
+            if (Physics.Raycast(transform.position, PlayerTransform.transform.position - transform.position, out var hit, AttackRange))
             {
                 if(hit.collider.CompareTag("Player"))
                     return true;
