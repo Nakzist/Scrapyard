@@ -62,13 +62,13 @@ namespace _GAME_.Scripts.Enemy
 
         private void GetDataFromScriptable()
         {
-            var pursuerBotData = Resources.Load<PursuerBotScriptableObject>(FolderPaths.PURSUER_BOT_DATA_PATH);
+            var droneBotData = Resources.Load<PursuerBotScriptableObject>(FolderPaths.DRONE_BOT_DATA_PATH);
 
-            _attackCooldown = pursuerBotData.AttackCooldown;
-            _attackAngle = pursuerBotData.AttackAngle;
-            _playerLayerMask = pursuerBotData.PlayerLayerMask;
+            _attackCooldown = droneBotData.AttackCooldown;
+            _attackAngle = droneBotData.AttackAngle;
+            _playerLayerMask = droneBotData.PlayerLayerMask;
             
-            GetBaseVariables(pursuerBotData);
+            GetBaseVariables(droneBotData);
         }
 
         private IEnumerator MeleeAttack()
