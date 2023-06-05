@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
+using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,7 +15,12 @@ namespace _GAME_.Scripts.Enemy
         private float _moveRange;
         private float _rotationSpeed;
         private float _delayBetweenShoots;
-        private bool _canShoot;
+        private bool _canShoot = true;
+        
+        private LineRenderer _lineRenderer;
+        private float _dodgeSpeedThreshold;
+        private bool _isShooting = false;
+        private bool _playerDodged = false;
 
         #endregion
 
@@ -25,6 +31,7 @@ namespace _GAME_.Scripts.Enemy
             base.Start();
 
             GetDataFromScriptable();
+            LineRendererSettings();
         }
 
         #endregion
@@ -35,8 +42,20 @@ namespace _GAME_.Scripts.Enemy
         {
             if (!_canShoot)
                 return BtNodeState.Failure;
+
+            if (_isShooting)
+                return BtNodeState.Failure;
+
+            if (PlayerDodged())
+            {
+                _playerDodged = true;
+                return BtNodeState.Failure;
+            }
             
-            Debug.Log("Shooting");
+            StartCoroutine(ShootDelay());
+            
+            StartCoroutine(ShootLaser());
+
             return BtNodeState.Success;
         }
 
@@ -45,7 +64,7 @@ namespace _GAME_.Scripts.Enemy
             var dest = FindLocationWithClearLineOfSight();
             MoveToDestination(dest);
             
-            RotateTowardsPlayer();
+            RotateTowardsTarget(PlayerTransform, _rotationSpeed);
 
             return BtNodeState.Success;
         }
@@ -74,15 +93,13 @@ namespace _GAME_.Scripts.Enemy
             Damage = sniperBotData.Damage;
             AttackRange = sniperBotData.AttackRange;
             _delayBetweenShoots = sniperBotData.DelayBetweenShoots;
+            _dodgeSpeedThreshold = sniperBotData.DodgeSpeedThreshold;
         }
 
         private bool HasClearLineOfSight()
         {
             if (PlayerTransform == null)
-            {
-                Debug.Log("Player is null");
                 return false;
-            }
 
             
             if (Physics.Raycast(transform.position, PlayerTransform.transform.position - transform.position, out var hit,
@@ -90,13 +107,8 @@ namespace _GAME_.Scripts.Enemy
             {
                 if(hit.collider.CompareTag("Player"))
                     return true;
-                else
-                {
-                    Debug.Log("Something else than player hit");
-                }
             }
-
-            Debug.Log("Player not in range");
+            
             return false;
         }
 
@@ -130,23 +142,82 @@ namespace _GAME_.Scripts.Enemy
             return transform.position;
         }
 
-        private void MoveToDestination(Vector3 dest)
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void ApplyDamageToPlayer()
         {
-            Agent.destination = dest;
-        }
-
-        private void RotateTowardsPlayer()
-        {
-            var dir = PlayerTransform.position - transform.position;
-            var targetRot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotationSpeed * Time.deltaTime);
+            if (PlayerTransform != null)
+            {
+                var direction = PlayerTransform.position - transform.position;
+                if (Physics.Raycast(transform.position, direction, out var hit, AttackRange))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        var playerDamageable = hit.collider.GetComponent<IDamageable>();
+                        if (playerDamageable != null)
+                        {
+                            playerDamageable.TakeDamage(Damage);
+                        }
+                    }
+                }
+            }
         }
         
+        private IEnumerator ShootLaser()
+        {
+            _isShooting = true;
+            _lineRenderer.enabled = true;
+            
+            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(1, PlayerTransform.position);
+
+            yield return new WaitForSeconds(0.1f);
+
+            _lineRenderer.enabled = false;
+            _isShooting = false;
+
+            if (!_playerDodged)
+            {
+                ApplyDamageToPlayer();
+            }
+            else
+            {
+                _playerDodged = false;
+            }
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private bool PlayerDodged()
+        {
+            if (PlayerTransform != null)
+            {
+                var direction = PlayerTransform.position - transform.position;
+                if (Physics.Raycast(transform.position, direction, out var hit, AttackRange))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        var playerRigidbody = PlayerTransform.GetComponent<Rigidbody>();
+                        if (playerRigidbody != null && playerRigidbody.velocity.magnitude > _dodgeSpeedThreshold)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private IEnumerator ShootDelay()
         {
             _canShoot = false;
             yield return new WaitForSeconds(_delayBetweenShoots);
             _canShoot = true;
+        }
+        
+        private void LineRendererSettings()
+        {
+            _lineRenderer = GetComponent<LineRenderer>();
+            _lineRenderer.enabled = false;
+
+            _lineRenderer.startWidth = 0.1f;
+            _lineRenderer.endWidth = 0.1f;
         }
 
         #endregion

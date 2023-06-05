@@ -33,6 +33,7 @@ namespace _GAME_.Scripts.Enemy
             _behaviourTreeRoot = CreateBehaviourTree();
 
             Agent = GetComponent<NavMeshAgent>();
+            
             StartCoroutine(GetPlayer());
         }
 
@@ -85,6 +86,22 @@ namespace _GAME_.Scripts.Enemy
         
         #endregion
 
+        #region Protected Methods
+
+        private protected void MoveToDestination(Vector3 dest)
+        {
+            Agent.destination = dest;
+        }
+        
+        private protected void RotateTowardsTarget(Transform target, float rotationSpeed)
+        {
+            var dir = target.position - transform.position;
+            var targetRot = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        }
+
+        #endregion
+        
         #region Private Methods
 
         private BtNode CreateBehaviourTree()

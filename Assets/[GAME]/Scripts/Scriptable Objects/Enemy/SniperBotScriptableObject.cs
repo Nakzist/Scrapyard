@@ -13,6 +13,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
 
         [Header("Sniper Bot Combat Settings")] 
         [SerializeField] private float delayBetweenShoots = 1f;
+        [SerializeField] private float dodgeSpeedThreshold = 7.5f;
 
         #endregion
 
@@ -21,6 +22,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
         public float RotationSpeed => rotationSpeed;
         public float MoveRange => moveRange;
         public float DelayBetweenShoots => delayBetweenShoots;
+        public float DodgeSpeedThreshold => dodgeSpeedThreshold;
 
         #endregion
     }
