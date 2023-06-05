@@ -3,7 +3,7 @@ using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
 using UnityEngine;
 
-namespace _GAME_.Scripts.Enemy
+namespace _GAME_.Scripts.Enemy.Old_Enemies
 {
     public class ExplodingOldEnemy : BaseOldEnemy
     {

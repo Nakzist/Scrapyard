@@ -4,7 +4,7 @@ using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Player;
 using UnityEngine;
 
-namespace _GAME_.Scripts.Enemy
+namespace _GAME_.Scripts.Enemy.Old_Enemies
 {
     [RequireComponent(typeof(Rigidbody))]
     public class FollowerOldEnemy : BaseOldEnemy

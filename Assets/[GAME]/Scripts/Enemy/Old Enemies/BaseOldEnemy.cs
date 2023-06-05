@@ -2,7 +2,7 @@
 using _GAME_.Scripts.Observer;
 using UnityEngine;
 
-namespace _GAME_.Scripts.Enemy
+namespace _GAME_.Scripts.Enemy.Old_Enemies
 {
     [RequireComponent(typeof(Rigidbody))]
     public abstract class BaseOldEnemy : ObserverBase, IDamageable
