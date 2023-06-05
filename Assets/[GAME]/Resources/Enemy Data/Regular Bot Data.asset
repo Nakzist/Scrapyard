@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a38352117e462992d3235dd9e77e99, type: 3}
-  m_Name: Drone Bot Data
+  m_Script: {fileID: 11500000, guid: 2173cecab16741d0bc6e7bd25ff34fa8, type: 3}
+  m_Name: Regular Bot Data
   m_EditorClassIdentifier: 
   speed: 4
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
   maxHealth: 10
-  attackRange: 10
+  attackRange: 3
   damage: 5
   attackCooldown: 1
   attackAngle: 60
