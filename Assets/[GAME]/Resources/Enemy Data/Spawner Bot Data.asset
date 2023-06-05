@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d5d36c1b1b4a40be3b7ba097ae5755, type: 3}
+  m_Name: Spawner Bot Data
+  m_EditorClassIdentifier: 
+  speed: 4
+  angularSpeed: 720
+  acceleration: 8
+  rotationSpeed: 10
+  maxHealth: 20
+  attackRange: 10
+  damage: 5
+  roamRadius: 5
+  spawnCooldown: 10
+  spawnAmount: 1
+  spawnPrefab: {fileID: 4519557190363625241, guid: 97a0daec87aa30840bb529a311eab134, type: 3}
