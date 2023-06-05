@@ -1,9 +1,8 @@
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
-using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Observer;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Player
 {
@@ -39,7 +38,7 @@ namespace _GAME_.Scripts.Player
 
         #region Public Methods
 
-        public void TakeDamage(float incomingDamage)
+        public void TakeDamage(float incomingDamage, DamageType damageType)
         {
             _health -= incomingDamage;
             Push(CustomEvents.OnHealthChanged);

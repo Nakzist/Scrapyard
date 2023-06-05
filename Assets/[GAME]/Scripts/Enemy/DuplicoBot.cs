@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
@@ -117,7 +118,7 @@ namespace _GAME_.Scripts.Enemy
                 {
                     if (hitCollider.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamage(Damage);
+                        damageable.TakeDamage(Damage, DamageType.Melee);
                     }
                 }
             }

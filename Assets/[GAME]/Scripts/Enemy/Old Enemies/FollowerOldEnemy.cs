@@ -1,4 +1,5 @@
 using System.Collections;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Player;
@@ -45,7 +46,7 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         {
             CanMove = false;
             LastAttackTime = Time.time;
-            GameManager.Instance.currentPlayer.GetComponent<PlayerHealthManager>().TakeDamage(damage);
+            GameManager.Instance.currentPlayer.GetComponent<PlayerHealthManager>().TakeDamage(damage, DamageType.Melee);
             yield return new WaitForSeconds(1f);
             CanMove = true;
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
@@ -71,7 +72,7 @@ namespace _GAME_.Scripts.Enemy
 
         #region Public Methods
 
-        public void TakeDamage(float incomingDamage)
+        public void TakeDamage(float incomingDamage, DamageType damageType)
         {
             _currentHealth -= incomingDamage;
 

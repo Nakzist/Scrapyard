@@ -1,3 +1,4 @@
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
@@ -53,7 +54,7 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
             {
                 if (col.TryGetComponent(out IDamageable damagable))
                 {
-                    damagable.TakeDamage(damage);
+                    damagable.TakeDamage(damage, DamageType.Melee);
                 }
             }
             Destroy(gameObject);

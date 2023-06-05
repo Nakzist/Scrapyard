@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
@@ -160,7 +161,7 @@ namespace _GAME_.Scripts.Enemy
                         var playerDamageable = hit.collider.GetComponent<IDamageable>();
                         if (playerDamageable != null)
                         {
-                            playerDamageable.TakeDamage(Damage);
+                            playerDamageable.TakeDamage(Damage, DamageType.Ranged);
                         }
                     }
                 }

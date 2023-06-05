@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Scriptable_Objects.Player;
@@ -111,7 +112,7 @@ namespace _GAME_.Scripts.Player
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_weaponDamage);
+                    damageable.TakeDamage(_weaponDamage, DamageType.Ranged);
                 }
                 
                 shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
@@ -141,7 +142,7 @@ namespace _GAME_.Scripts.Player
             {
                 if (enemy.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_meleeDamage);
+                    damageable.TakeDamage(_meleeDamage, DamageType.Melee);
                 }
             }
             yield return new WaitForSeconds(4f);

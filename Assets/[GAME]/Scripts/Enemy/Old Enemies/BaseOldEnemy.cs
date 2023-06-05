@@ -1,4 +1,5 @@
-﻿using _GAME_.Scripts.Interfaces;
+﻿using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Observer;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         private protected bool IsDead;
         private protected Rigidbody Rb;
 
-        public virtual void TakeDamage(float incomingDamage)
+        public virtual void TakeDamage(float incomingDamage, DamageType damageType)
         {
             if (IsDead) return;
             

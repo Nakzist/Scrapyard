@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
@@ -88,7 +89,7 @@ namespace _GAME_.Scripts.Enemy
             foreach (var col in colliders)
             {
                 var damageable = col.GetComponent<IDamageable>();
-                damageable?.TakeDamage(_explosionDamage);
+                damageable?.TakeDamage(_explosionDamage, DamageType.Melee);
             }
             
             GameManager.Instance.aliveEnemies.Remove(gameObject);
