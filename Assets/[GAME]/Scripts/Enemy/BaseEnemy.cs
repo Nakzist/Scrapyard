@@ -72,7 +72,7 @@ namespace _GAME_.Scripts.Enemy
 
         #region Public Methods
 
-        public void TakeDamage(float incomingDamage, DamageType damageType)
+        public virtual void TakeDamage(float incomingDamage, DamageType damageType)
         {
             _currentHealth -= incomingDamage;
 

@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7407ac2b10c494cad17a783f6b45013, type: 3}
-  m_Name: Tyrant Bot Data
+  m_Script: {fileID: 11500000, guid: 46d4e9f3704d4c54822a51c4e99a4f69, type: 3}
+  m_Name: Kenny Bot Data
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 4
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
-  maxHealth: 50
+  maxHealth: 10
   attackRange: 3
-  damage: 20
+  damage: 5
   attackCooldown: 1
   attackAngle: 60
   playerLayerMask:
