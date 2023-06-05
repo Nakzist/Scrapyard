@@ -17,5 +17,9 @@ namespace _GAME_.Scripts.GlobalVariables
         public const string SNIPER_BOT_DATA_PATH = "Enemy Data/Sniper Bot Data";
         public const string SPINNER_BOT_DATA_PATH = "Enemy Data/Spinner Bot Data";
         public const string VACUUM_BOT_DATA_PATH = "Enemy Data/Vacuum Bot Data";
+        
+        public const string TYRANT_BOT_DATA_PATH = "Enemy Data/Tyrant Bot Data";
+        public const string KENNY_BOT_DATA_PATH = "Enemy Data/Kenny Bot Data";
+        public const string SPAWNER_BOT_DATA_PATH = "Enemy Data/Spawner Bot Data";
     }
 }
