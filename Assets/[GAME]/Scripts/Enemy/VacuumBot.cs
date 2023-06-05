@@ -62,13 +62,13 @@ namespace _GAME_.Scripts.Enemy
 
         private void GetDataFromScriptable()
         {
-            var vacuumBotData = Resources.Load<VacuumBotScriptableObject>(FolderPaths.VACUUM_BOT_DATA_PATH);
+            var spinnerBotData = Resources.Load<VacuumBotScriptableObject>(FolderPaths.VACUUM_BOT_DATA_PATH);
 
-            _attackCooldown = vacuumBotData.AttackCooldown;
-            _attackAngle = vacuumBotData.AttackAngle;
-            _playerLayerMask = vacuumBotData.PlayerLayerMask;
+            _attackCooldown = spinnerBotData.AttackCooldown;
+            _attackAngle = spinnerBotData.AttackAngle;
+            _playerLayerMask = spinnerBotData.PlayerLayerMask;
             
-            GetBaseVariables(vacuumBotData);
+            GetBaseVariables(spinnerBotData);
         }
 
         private IEnumerator MeleeAttack()
