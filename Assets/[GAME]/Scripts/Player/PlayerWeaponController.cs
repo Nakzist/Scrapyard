@@ -103,6 +103,10 @@ namespace _GAME_.Scripts.Player
         {
             var currentBullet = Instantiate(this._bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
+            
+            // Calculate the shooting direction
+            var shootingDirection = _mainCamera.transform.forward;
+            
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out var hit,
                     _weaponRange, _hittableMask))
             {
@@ -111,10 +115,13 @@ namespace _GAME_.Scripts.Player
                     Debug.Log(hit.transform.name);
                     damageable.TakeDamage(_weaponDamage);
                 }
-
-                currentBullet.GetComponent<Rigidbody>().velocity =
-                    (hit.point - transform.position).normalized * _bulletSpeed;
+                
+                // Update the shooting direction based on the hit point
+                shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
             }
+            
+            // Apply velocity to the bullet in the shooting direction
+            currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _bulletSpeed;
         }
                 
         private void HandleMeleeAttack()

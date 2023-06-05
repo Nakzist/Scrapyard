@@ -1,15 +1,17 @@
 ﻿using System.Collections;
-using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
+using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace _GAME_.Scripts.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class BaseEnemy : MonoBehaviour, IDamageable
+    public class BaseEnemy : ObserverBase, IDamageable
     {
         #region Private Variables
 
@@ -25,6 +27,14 @@ namespace _GAME_.Scripts.Enemy
         private protected Transform PlayerTransform;
         
         private Coroutine _behaviorCoroutine;
+
+        #endregion
+
+        #region Serialized Variables
+
+        [Header("Interaction Settings")]
+        [SerializeField] private bool drawGizmos = false;
+        [SerializeField] private float gizmosRadius = 1f;
 
         #endregion
 
@@ -49,6 +59,14 @@ namespace _GAME_.Scripts.Enemy
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            if(!drawGizmos)
+                return;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, gizmosRadius);
+        }
+
         #endregion
 
         #region Public Methods
@@ -56,9 +74,9 @@ namespace _GAME_.Scripts.Enemy
         public void TakeDamage(float incomingDamage)
         {
             _currentHealth -= incomingDamage;
-            
-            if(_currentHealth <= 0)
-                Destroy(gameObject);
+
+            if (_currentHealth <= 0)
+                EnemyDeath();
         }
 
         #endregion
@@ -128,6 +146,14 @@ namespace _GAME_.Scripts.Enemy
 
                 yield return null;
             }
+        }
+
+        private protected virtual void EnemyDeath()
+        {
+            GameManager.Instance.aliveEnemies.Remove(gameObject);
+            Push(CustomEvents.OnEnemyDeath);
+            Debug.Log(gameObject.name + " died");
+            Destroy(gameObject);
         }
 
         #endregion

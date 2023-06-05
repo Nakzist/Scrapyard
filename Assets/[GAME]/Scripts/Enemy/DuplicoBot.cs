@@ -6,14 +6,17 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.Enemy
 {
-    public class SpinnerBot : BaseEnemy
+    public class DuplicoBot : BaseEnemy
     {
         #region Private Variables
-
+        
         private bool _canAttack = true;
         private float _attackCooldown;
         private float _attackAngle;
         private LayerMask _playerLayerMask;
+
+        private float _enemyToSpawn;
+        private GameObject _enemyPrefab;
 
         #endregion
 
@@ -56,19 +59,37 @@ namespace _GAME_.Scripts.Enemy
             return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
         }
 
+        private protected override void EnemyDeath()
+        {
+            SpawnEnemy();
+            base.EnemyDeath();
+        }
+
         #endregion
 
         #region Private Methods
 
         private void GetDataFromScriptable()
         {
-            var spinnerBotData = Resources.Load<SpinnerBotScriptableObject>(FolderPaths.SPINNER_BOT_DATA_PATH);
-
-            _attackCooldown = spinnerBotData.AttackCooldown;
-            _attackAngle = spinnerBotData.AttackAngle;
-            _playerLayerMask = spinnerBotData.PlayerLayerMask;
+            var duplicoBotData = Resources.Load<DuplicoBotScriptableObject>(FolderPaths.DUPLICO_BOT_DATA_PATH);
             
-            GetBaseVariables(spinnerBotData);
+            _attackCooldown = duplicoBotData.AttackCooldown;
+            _attackAngle = duplicoBotData.AttackAngle;
+            _playerLayerMask = duplicoBotData.PlayerLayerMask;
+            
+            _enemyToSpawn = duplicoBotData.EnemyToSpawn;
+            _enemyPrefab = duplicoBotData.EnemyPrefab;
+            
+            GetBaseVariables(duplicoBotData);
+        }
+
+        private void SpawnEnemy()
+        {
+            for (var i = 0; i < _enemyToSpawn; i++)
+            {
+                var t = transform;
+                Instantiate(_enemyPrefab, t.position, t.rotation);
+            }
         }
         
         private IEnumerator MeleeAttack()
@@ -78,7 +99,7 @@ namespace _GAME_.Scripts.Enemy
             yield return new WaitForSeconds(_attackCooldown);
             _canAttack = true;
         }
-        
+
         private void ApplyDamage()
         {
             // ReSharper disable once Unity.PreferNonAllocApi

@@ -15,10 +15,10 @@ MonoBehaviour:
   speed: 4
   angularSpeed: 720
   acceleration: 8
-  maxHealth: 100
+  rotationSpeed: 10
+  maxHealth: 5
   attackRange: 10000
   damage: 5
-  rotationSpeed: 10
   moveRange: 10
   delayBetweenShoots: 1
   dodgeSpeedThreshold: 10

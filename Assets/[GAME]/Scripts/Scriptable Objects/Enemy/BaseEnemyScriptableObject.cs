@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Scriptable_Objects.Enemy
 {
@@ -14,7 +13,7 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
         [SerializeField] private float rotationSpeed = 10f;
 
         [Header("Combat Settings")] 
-        [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float attackRange = 10f;
         [SerializeField] private float damage = 5f;
 

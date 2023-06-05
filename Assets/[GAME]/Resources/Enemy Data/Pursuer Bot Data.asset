@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da77003ecdbd444d9e17f187d777ee6f, type: 3}
   m_Name: Pursuer Bot Data
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 10
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
-  maxHealth: 100
-  attackRange: 10
+  maxHealth: 20
+  attackRange: 3
   damage: 5
+  attackCooldown: 1
+  attackAngle: 60
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128

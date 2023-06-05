@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
+using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
 using UnityEngine;
 
@@ -34,11 +34,8 @@ namespace _GAME_.Scripts.Enemy
 
         protected override void Node1()
         {
-            Debug.Log("Node1");
             if (_isExploding)
-            {
                 return;
-            }
             
             StartCoroutine(ExplodeDelay());
         }
@@ -46,22 +43,17 @@ namespace _GAME_.Scripts.Enemy
         protected override void Node2()
         {
             if (PlayerTransform == null || _isExploding)
-            {
                 return;
-            }
             
             // Move towards the player
             RotateTowardsTarget(PlayerTransform, RotationSpeed);
             MoveToDestination(PlayerTransform.position);
-
         }
         
         protected override bool SelectorNode()
         {
             if (PlayerTransform == null)
-            {
                 return false;
-            }
 
             return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
         }
@@ -87,7 +79,7 @@ namespace _GAME_.Scripts.Enemy
         {
             _isExploding = true;
             
-            Agent.speed *= 0.5f;
+            Agent.speed *= 1.3f;
             
             yield return new WaitForSeconds(_explosionDelay);
             
@@ -98,7 +90,8 @@ namespace _GAME_.Scripts.Enemy
                 var damageable = col.GetComponent<IDamageable>();
                 damageable?.TakeDamage(_explosionDamage);
             }
-
+            
+            GameManager.Instance.aliveEnemies.Remove(gameObject);
             Destroy(gameObject);
         }
 
