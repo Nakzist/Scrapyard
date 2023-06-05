@@ -62,7 +62,7 @@ namespace _GAME_.Scripts.Enemy
 
         private void GetDataFromScriptable()
         {
-            var droneBotData = Resources.Load<PursuerBotScriptableObject>(FolderPaths.DRONE_BOT_DATA_PATH);
+            var droneBotData = Resources.Load<DroneBotScriptableObject>(FolderPaths.DRONE_BOT_DATA_PATH);
 
             _attackCooldown = droneBotData.AttackCooldown;
             _attackAngle = droneBotData.AttackAngle;
