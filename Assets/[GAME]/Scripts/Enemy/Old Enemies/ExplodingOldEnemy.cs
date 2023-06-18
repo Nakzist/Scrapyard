@@ -20,6 +20,8 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         {
             if (!CanMove) return;
             
+            if(GameManager.Instance == null || GameManager.Instance.currentPlayer) return;
+            
             if (Vector3.Distance(GameManager.Instance.currentPlayer.transform.position, transform.position) <= range && LastAttackTime + delayBetweenAttacks <= Time.time)
             {
                 Attack();
@@ -39,22 +41,25 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
 
         private void Attack()
         {
-            EnemyDeath();
+            EnemyDeath(DamageCauser.Enemy);
         }
         
-        private protected override void EnemyDeath()
+        private protected override void EnemyDeath(DamageCauser damageCauser)
         {
             IsDead = true;
             GameManager.Instance.aliveEnemies.Remove(gameObject);
-            Push(CustomEvents.OnEnemyDeath);
+            
+            if(damageCauser == DamageCauser.Player)
+                Push(CustomEvents.OnEnemyDeath);
+            
             var sphere = Instantiate(areaPrefab, transform.position, Quaternion.identity);
             Destroy(sphere, .3f);
             // ReSharper disable once Unity.PreferNonAllocApi
             foreach (var col in Physics.OverlapSphere(transform.position, 3f))
             {
-                if (col.TryGetComponent(out IDamageable damagable))
+                if (col.TryGetComponent(out IDamageable damageable))
                 {
-                    damagable.TakeDamage(damage, DamageType.Melee);
+                    damageable.TakeDamage(damage, DamageType.Melee, DamageCauser.Enemy);
                 }
             }
             Destroy(gameObject);

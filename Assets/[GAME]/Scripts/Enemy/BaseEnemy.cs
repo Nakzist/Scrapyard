@@ -72,12 +72,12 @@ namespace _GAME_.Scripts.Enemy
 
         #region Public Methods
 
-        public virtual void TakeDamage(float incomingDamage, DamageType damageType)
+        public virtual void TakeDamage(float incomingDamage, DamageType damageType, DamageCauser damageCauser)
         {
             _currentHealth -= incomingDamage;
 
             if (_currentHealth <= 0)
-                EnemyDeath();
+                EnemyDeath(damageCauser);
         }
 
         #endregion
@@ -149,11 +149,13 @@ namespace _GAME_.Scripts.Enemy
             }
         }
 
-        private protected virtual void EnemyDeath()
+        private protected virtual void EnemyDeath(DamageCauser damageCauser)
         {
             GameManager.Instance.aliveEnemies.Remove(gameObject);
-            Push(CustomEvents.OnEnemyDeath);
-            Debug.Log(gameObject.name + " died");
+            
+            if(damageCauser == DamageCauser.Player)
+                Push(CustomEvents.OnEnemyDeath);
+            
             Destroy(gameObject);
         }
 

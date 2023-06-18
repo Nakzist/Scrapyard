@@ -161,7 +161,7 @@ namespace _GAME_.Scripts.Enemy
                         var playerDamageable = hit.collider.GetComponent<IDamageable>();
                         if (playerDamageable != null)
                         {
-                            playerDamageable.TakeDamage(Damage, DamageType.Ranged);
+                            playerDamageable.TakeDamage(Damage, DamageType.Ranged, DamageCauser.Enemy);
                         }
                     }
                 }

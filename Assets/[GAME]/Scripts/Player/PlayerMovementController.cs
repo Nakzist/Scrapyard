@@ -25,6 +25,19 @@ namespace _GAME_.Scripts.Player
         
         private PlayerMovementDataScriptableObject _playerMovementData;
         private PlayerInputHandler _playerInputHandler;
+        
+        // Add a boolean to keep track of whether the player just jumped
+        private bool _justJumped = false;
+        
+        // Add a timer for how long the player can bunny hop after a jump
+        private float _bunnyHopTimer = 0.0f;
+        // The time window for a bunny hop to occur
+        private float _bunnyHopWindow = 0.1f;
+        // The speed boost for a bunny hop
+        private float _bunnyHopBoost = 2.0f;
+        
+        private float _jumpDebounceTime = 0.1f;
+        private float _jumpDebounce;
 
         #endregion
 
@@ -46,7 +59,26 @@ namespace _GAME_.Scripts.Player
         private void Update()
         {
             MovePlayer();
+            
+            // Reduce the jump debounce timer if it's greater than 0
+            if(_jumpDebounce > 0)
+            {
+                _jumpDebounce -= Time.deltaTime;
+            }
+            
             HandleJump();
+            
+            // Decrease the bunny hop timer
+            if(_justJumped)
+            {
+                _bunnyHopTimer -= Time.deltaTime;
+                
+                // If the bunny hop timer runs out, the player cannot bunny hop
+                if(_bunnyHopTimer <= 0.0f)
+                {
+                    _justJumped = false;
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -84,7 +116,7 @@ namespace _GAME_.Scripts.Player
             var t = transform;
             var playerMovement = t.forward * _playerInputHandler.VerticalMovement +
                                  t.right * _playerInputHandler.HorizontalMovement;
-            playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed;
+            playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed * Time.deltaTime;
             playerMovement.y += _rb.velocity.y;
             _rb.velocity = playerMovement;
         }
@@ -93,9 +125,23 @@ namespace _GAME_.Scripts.Player
         {
             // ReSharper disable once Unity.PreferNonAllocApi
             _isGrounded = Physics.OverlapSphere(transform.position, .1f, _groundMask).Length != 0;
-            if (_isGrounded && _playerInputHandler.IsJumping)
+            if (_jumpDebounce <= 0 && (_playerInputHandler.IsJumping || Input.mouseScrollDelta.y < 0))
             {
-                _rb.AddForce(transform.up * _jumpForce, ForceMode.Impulse);
+                if (_isGrounded || _justJumped)
+                {
+                    _rb.AddForce(transform.up * (_justJumped ? _jumpForce * _bunnyHopBoost : _jumpForce), ForceMode.Impulse);
+                    _justJumped = true;
+                    _bunnyHopTimer = _bunnyHopWindow;
+                }
+                // Start the jump debounce timer if the player is on the ground
+                if (_isGrounded)
+                {
+                    _jumpDebounce = _jumpDebounceTime;
+                }
+            }
+            else if (_isGrounded)
+            {
+                _justJumped = false;
             }
         }
 

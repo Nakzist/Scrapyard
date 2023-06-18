@@ -60,10 +60,10 @@ namespace _GAME_.Scripts.Enemy
             return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
         }
 
-        private protected override void EnemyDeath()
+        private protected override void EnemyDeath(DamageCauser damageCauser)
         {
             SpawnEnemy();
-            base.EnemyDeath();
+            base.EnemyDeath(damageCauser);
         }
 
         #endregion
@@ -118,7 +118,7 @@ namespace _GAME_.Scripts.Enemy
                 {
                     if (hitCollider.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamage(Damage, DamageType.Melee);
+                        damageable.TakeDamage(Damage, DamageType.Melee, DamageCauser.Enemy);
                     }
                 }
             }

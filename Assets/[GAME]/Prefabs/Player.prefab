@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSensitivity: 2
-  verticalSensitivity: 1.5
+  verticalSensitivity: 2
 --- !u!114 &9119307880115906216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f6aa5fab0b4830b2c47e7617b0a948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudPrefab: {fileID: 2126742534534426165, guid: 488d68d7029ca864c814c1e6005f48f4, type: 3}
 --- !u!54 &7548707330748100265
 Rigidbody:
   m_ObjectHideFlags: 0

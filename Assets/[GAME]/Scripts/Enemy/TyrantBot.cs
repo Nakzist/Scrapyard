@@ -97,7 +97,7 @@ namespace _GAME_.Scripts.Enemy
                 {
                     if (hitCollider.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamage(Damage, DamageType.Melee);
+                        damageable.TakeDamage(Damage, DamageType.Melee, DamageCauser.Enemy);
                     }
                 }
             }

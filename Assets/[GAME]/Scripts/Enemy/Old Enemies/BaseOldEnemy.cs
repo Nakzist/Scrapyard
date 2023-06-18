@@ -20,16 +20,16 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         private protected bool IsDead;
         private protected Rigidbody Rb;
 
-        public virtual void TakeDamage(float incomingDamage, DamageType damageType)
+        public void TakeDamage(float incomingDamage, DamageType damageType, DamageCauser damageCauser)
         {
             if (IsDead) return;
             
             CurrentHealth -= incomingDamage;
             if(CurrentHealth <= 0)
-                EnemyDeath();
+                EnemyDeath(damageCauser);
         }
-        
-        private protected abstract void EnemyDeath();
+
+        private protected abstract void EnemyDeath(DamageCauser damageCauser);
 
         protected virtual void Start()
         {

@@ -40,6 +40,12 @@ namespace _GAME_.Scripts.Controllers
             {
                 _spawnPoints.Add(child);
             }
+
+            if (GameManager.Instance == null)
+            {
+                var manager = new GameObject("GameManager");
+                manager.AddComponent<GameManager>();
+            }
         }
 
         private void Update()

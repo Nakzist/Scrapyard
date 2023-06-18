@@ -66,7 +66,9 @@ namespace _GAME_.Scripts.Player
             if (drawAttackRange)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawWireCube(AttackRangeTransform.position, attackRange);
+                Gizmos.matrix = Matrix4x4.TRS(AttackRangeTransform.position, AttackRangeTransform.rotation, Vector3.one);
+                Gizmos.DrawWireCube(Vector3.zero, attackRange); // Draw at the origin because we have already included the position in the Gizmos.matrix
+                Gizmos.matrix = Matrix4x4.identity; // Reset the Gizmos.matrix to not affect other Gizmos
             }
         }
 
@@ -112,7 +114,7 @@ namespace _GAME_.Scripts.Player
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_weaponDamage, DamageType.Ranged);
+                    damageable.TakeDamage(_weaponDamage, DamageType.Ranged, DamageCauser.Player);
                 }
                 
                 shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
@@ -135,14 +137,14 @@ namespace _GAME_.Scripts.Player
             Debug.Log("Melee Attacking");
             _canMeleeAttack = false;
             // ReSharper disable once Unity.PreferNonAllocApi
-            var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, Quaternion.identity, _hittableMask,
+            var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, AttackRangeTransform.rotation, _hittableMask,
                 QueryTriggerInteraction.Collide);
 
             foreach (var enemy in colliders)
             {
                 if (enemy.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_meleeDamage, DamageType.Melee);
+                    damageable.TakeDamage(_meleeDamage, DamageType.Melee, DamageCauser.Player);
                 }
             }
             yield return new WaitForSeconds(4f);

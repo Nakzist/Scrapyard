@@ -57,12 +57,12 @@ namespace _GAME_.Scripts.Enemy
             return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
         }
 
-        public override void TakeDamage(float incomingDamage, DamageType damageType)
+        public override void TakeDamage(float incomingDamage, DamageType damageType, DamageCauser damageCauser)
         {
             if(damageType == DamageType.Ranged)
                 return;
             
-            base.TakeDamage(incomingDamage, damageType);
+            base.TakeDamage(incomingDamage, damageType, DamageCauser.Enemy);
         }
 
         #endregion
@@ -105,7 +105,7 @@ namespace _GAME_.Scripts.Enemy
                 {
                     if (hitCollider.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamage(Damage, DamageType.Melee);
+                        damageable.TakeDamage(Damage, DamageType.Melee, DamageCauser.Enemy);
                     }
                 }
             }

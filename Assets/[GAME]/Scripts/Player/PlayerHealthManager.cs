@@ -38,7 +38,7 @@ namespace _GAME_.Scripts.Player
 
         #region Public Methods
 
-        public void TakeDamage(float incomingDamage, DamageType damageType)
+        public void TakeDamage(float incomingDamage, DamageType damageType, DamageCauser damageCauser)
         {
             _health -= incomingDamage;
             Push(CustomEvents.OnHealthChanged);
