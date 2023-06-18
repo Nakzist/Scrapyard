@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c821e8d647cb24e41bb2621ba406bcd3, type: 2}
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 6382212566048626182, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
@@ -246,6 +246,10 @@ PrefabInstance:
     - target: {fileID: 1288055177016212781, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074824192487748577, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6382212565411656152, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
       propertyPath: hpText
