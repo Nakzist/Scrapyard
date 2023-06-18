@@ -28,6 +28,7 @@ namespace _GAME_.Scripts.Enemy
         private protected Transform PlayerTransform;
         
         private Coroutine _behaviorCoroutine;
+        private bool _deathByCloseCombat;
 
         #endregion
 
@@ -77,7 +78,20 @@ namespace _GAME_.Scripts.Enemy
             _currentHealth -= incomingDamage;
 
             if (_currentHealth <= 0)
+            {
                 EnemyDeath(damageCauser);
+                if(damageType == DamageType.Melee)
+                    _deathByCloseCombat = true;
+            }
+        }
+
+        public IEnumerator StunEnemy(float duration)
+        {
+            var speed  = Agent.speed;
+            Agent.speed = 0;
+            yield return new WaitForSeconds(duration);
+            // ReSharper disable once Unity.InefficientPropertyAccess
+            Agent.speed = speed;
         }
 
         #endregion
@@ -155,6 +169,9 @@ namespace _GAME_.Scripts.Enemy
             
             if(damageCauser == DamageCauser.Player)
                 Push(CustomEvents.OnEnemyDeath);
+            
+            if(_deathByCloseCombat)
+                Push(CustomEvents.OnEnemyDeathClose);
             
             Destroy(gameObject);
         }

@@ -11,6 +11,7 @@ namespace _GAME_.Scripts.Player
         #region Public Variables
 
         public float Health => _health;
+        public bool canReceiveDamage = true;
 
         #endregion
         
@@ -40,9 +41,19 @@ namespace _GAME_.Scripts.Player
 
         public void TakeDamage(float incomingDamage, DamageType damageType, DamageCauser damageCauser)
         {
-            _health -= incomingDamage;
-            Push(CustomEvents.OnHealthChanged);
-            if (_health <= 0) CharacterDeath();
+            if (canReceiveDamage)
+            {
+                _health -= incomingDamage;
+                Push(CustomEvents.OnHealthChanged);
+                if (_health <= 0) CharacterDeath();
+            }
+        }
+
+        public void HealPlayer(float amount)
+        {
+            _health += amount;
+            
+            if(_health > maxHealth) _health = maxHealth;
         }
         
         #endregion

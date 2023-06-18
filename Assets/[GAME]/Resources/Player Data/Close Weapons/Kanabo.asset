@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8a49a4d1f44a8e98da407dc2cd872b, type: 3}
+  m_Name: Kanabo
+  m_EditorClassIdentifier: 
+  weaponData:
+    weaponPrefab: {fileID: 0}
+    weaponDamage: 5
+    weaponRange: 20
+    attackSpeed: 1
+    weaponSkill: 3
+    weaponPositionOffset: {x: 0, y: 0, z: 0}
+    weaponRotationOffset: {x: 0, y: 0, z: 0}
+    weaponScale: {x: 0, y: 0, z: 0}
+    attackAnimationClip: {fileID: -667696598258144924, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

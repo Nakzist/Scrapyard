@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
@@ -42,8 +43,10 @@ namespace _GAME_.Scripts.Player
         #region Melee Variables
 
         private float _meleeDamage;
-        
+        private bool _meleeDamageBoost = false;
         private bool _canMeleeAttack = true;
+        private float _lastMeleeAttackTime;
+        private int _closeRangeEnemyKillCount;
 
         #endregion
 
@@ -110,6 +113,16 @@ namespace _GAME_.Scripts.Player
                 Gizmos.DrawWireCube(Vector3.zero, attackRange); // Draw at the origin because we have already included the position in the Gizmos.matrix
                 Gizmos.matrix = Matrix4x4.identity; // Reset the Gizmos.matrix to not affect other Gizmos
             }
+        }
+
+        private void OnEnable()
+        {
+            Register(CustomEvents.OnEnemyDeathClose, OnEnemyDeathWithCloseCombat);
+        }
+
+        private void OnDisable()
+        {
+            Unregister(CustomEvents.OnEnemyDeathClose, OnEnemyDeathWithCloseCombat);
         }
 
         #endregion
@@ -223,12 +236,15 @@ namespace _GAME_.Scripts.Player
             {
                 StartCoroutine(MeleeAttack());
             }
+            
+            _lastMeleeAttackTime += Time.deltaTime;
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
         private IEnumerator MeleeAttack()
         {
             _canMeleeAttack = false;
+            _lastMeleeAttackTime = 0;
             // ReSharper disable once Unity.PreferNonAllocApi
             var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, AttackRangeTransform.rotation, _currentWeapon.hittableLayerMask,
                 QueryTriggerInteraction.Collide);
@@ -244,6 +260,11 @@ namespace _GAME_.Scripts.Player
             _canMeleeAttack = true;
         }
 
+        private void OnEnemyDeathWithCloseCombat()
+        {
+            _closeRangeEnemyKillCount++;
+        }
+
         #endregion
 
         #endregion
@@ -255,6 +276,31 @@ namespace _GAME_.Scripts.Player
             return $"{_currentAmmo} / {_currentWeapon.maxAmmo}";
         }
 
+        public void GiveMeleeDamageBoost()
+        {
+            _meleeDamageBoost = true;
+        }
+
+        public bool IsMeleeAttackBoosted()
+        {
+            return _meleeDamageBoost;
+        }
+
+        public float GetLastMeleeAttackTime()
+        {
+            return _lastMeleeAttackTime;
+        }
+        
+        public int GetCloseRangeKillCount()
+        {
+            return _closeRangeEnemyKillCount;
+        }
+        
+        public void ResetCloseRangeKillCount()
+        {
+            _closeRangeEnemyKillCount = 0;
+        }
+        
         #endregion
     }
 }

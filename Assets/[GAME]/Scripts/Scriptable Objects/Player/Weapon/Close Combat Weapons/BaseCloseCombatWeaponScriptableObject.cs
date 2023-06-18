@@ -1,20 +1,20 @@
-﻿using UnityEngine;
+﻿using _GAME_.Scripts.Models;
+using UnityEngine;
 
 namespace _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Close_Combat_Weapons
 {
-    public abstract class BaseCloseCombatWeaponScriptableObject : ScriptableObject
+    [CreateAssetMenu(fileName = "New Close Combat Weapon", menuName = "Scrapyard/Data/Player/Weapon/Close Combat Weapon")]
+    public class BaseCloseCombatWeaponScriptableObject : ScriptableObject
     {
         #region Serialied Fields
 
-        [SerializeField] private AnimationClip shootAnimationClip;
+        [SerializeField] private CloseRangeWeaponData weaponData;
 
         #endregion
 
         #region Public Fields
-
-        public AnimationClip ShootAnimationClip => shootAnimationClip;
-
-        public abstract void WeaponSkill();
+        
+        public CloseRangeWeaponData WeaponData => weaponData;
 
         #endregion
     }
