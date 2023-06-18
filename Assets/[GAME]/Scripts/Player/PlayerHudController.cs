@@ -80,6 +80,9 @@ namespace _GAME_.Scripts.Player
         {
             if (GameManager.Instance.currentPlayer == null)
             {
+                if(_hpText == null)
+                    return;
+                
                 _hpText.text = "100";
             }
             else

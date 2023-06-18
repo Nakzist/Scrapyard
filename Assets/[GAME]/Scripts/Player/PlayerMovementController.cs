@@ -8,36 +8,30 @@ namespace _GAME_.Scripts.Player
     public class PlayerMovementController : MonoBehaviour
     {
         #region Private Variables
-
-        [Header("Movement")]
+        
         private float _moveSpeed;
         private float _sprintMoveSpeed;
         private float _jumpForce;
         private LayerMask _groundMask;
-        private Transform _groundChecker;
-        
+
         private bool _isGrounded = true;
     
         private float _cameraVerticalAngle;
 
         private Camera _mainCamera;
         private Rigidbody _rb;
+        private Animator _animator;
         
         private PlayerMovementDataScriptableObject _playerMovementData;
         private PlayerInputHandler _playerInputHandler;
         
-        // Add a boolean to keep track of whether the player just jumped
         private bool _justJumped = false;
-        
-        // Add a timer for how long the player can bunny hop after a jump
         private float _bunnyHopTimer = 0.0f;
-        // The time window for a bunny hop to occur
-        private float _bunnyHopWindow = 0.1f;
-        // The speed boost for a bunny hop
-        private float _bunnyHopBoost = 2.0f;
-        
-        private float _jumpDebounceTime = 0.1f;
         private float _jumpDebounce;
+
+        private float _bunnyHopWindow;
+        private float _bunnyHopBoost;
+        private float _jumpDebounceTime;
 
         #endregion
 
@@ -46,11 +40,11 @@ namespace _GAME_.Scripts.Player
         private void Start()
         {
             GetDataFromScriptable();
-            _groundChecker = transform.GetChild(0);
-            
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
             _playerInputHandler = GetComponent<PlayerInputHandler>();
             _mainCamera = Camera.main;
             if (_mainCamera != null) _mainCamera.transform.rotation = transform.rotation;
@@ -109,6 +103,9 @@ namespace _GAME_.Scripts.Player
             _jumpForce = _playerMovementData.JumpForce;
             _groundMask = _playerMovementData.GroundLayerMask;
 
+            _bunnyHopWindow = _playerMovementData.BunnyHopWindow;
+            _bunnyHopBoost = _playerMovementData.BunnyHopBoost;
+            _jumpDebounceTime = _playerMovementData.JumpDebounceTime;
         }
         
         private void MovePlayer()
@@ -119,6 +116,9 @@ namespace _GAME_.Scripts.Player
             playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed * Time.deltaTime;
             playerMovement.y += _rb.velocity.y;
             _rb.velocity = playerMovement;
+            
+            var speed = playerMovement.magnitude;
+            _animator.SetFloat("Speed", speed); // Use the speed to control the animator
         }
         
         private void HandleJump()
