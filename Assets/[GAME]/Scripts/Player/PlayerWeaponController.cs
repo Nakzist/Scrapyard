@@ -1,47 +1,74 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
-using _GAME_.Scripts.Scriptable_Objects.Player;
+using _GAME_.Scripts.Models;
+using _GAME_.Scripts.Observer;
+using _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Ranged_Weapons;
 using UnityEngine;
 
 namespace _GAME_.Scripts.Player
 {
     [RequireComponent(typeof(PlayerMovementController))]
-    public class PlayerWeaponController : MonoBehaviour
+    public class PlayerWeaponController : ObserverBase
     {
         #region Serialized Variables
         
-        [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private bool drawAttackRange;
         [SerializeField] private Vector3 attackRange;
+
+        [SerializeField] private bool addWeapon;
+        [SerializeField] private BaseRangedWeaponScriptableObject weaponToAdd;
+
+        [SerializeField] private Transform leftHandSocket;
+        [SerializeField] private Transform rightHandSocket;
 
         #endregion
 
         #region Private Variables
-        
-        private float _delayBetweenShots;
-        private float _weaponDamage;
-        private float _meleeDamage;
-        private float _weaponRange;
-        private float _bulletSpeed;
-        private GameObject _bulletPrefab;
-        private float _maxAmmo;
-        private LayerMask _hittableMask;
-        
+
+        #region Ranged Weapon Variables
+
+        private GameObject _weaponGameObject;
+        private float _currentAmmo;
+        private RangedWeapon _currentWeapon;
+        private Transform _bulletSpawnPoint;
+
         private float _lastTimeShot;
-    
+        private bool _isReloading;
+
+        #endregion
+
+        #region Melee Variables
+
+        private float _meleeDamage;
+        
         private bool _canMeleeAttack = true;
 
-        private PlayerWeaponDataScriptableObject _playerWeaponData;
-        
+        #endregion
+
+        #region Other Variables
+
         private Camera _mainCamera;
         
         private PlayerInputHandler _playerInputHandler;
         
         private Transform AttackRangeTransform => transform.GetChild(2);
+        
+        private Animator _animator;
+        private AnimatorOverrideController _animatorOverrideController;
+
+        #endregion
+
+        #endregion
+
+        #region Private Static Variables
+        
+        private static readonly int ShootSpeedMultiplier = Animator.StringToHash("ShootSpeedMultiplier");
+        private static readonly int ShootingTrigger = Animator.StringToHash("ShootingTrigger");
+        private static readonly int ReloadTrigger = Animator.StringToHash("ReloadTrigger");
+        private static readonly int AttackTrigger = Animator.StringToHash("AttackTrigger");
+        private static readonly int ReloadSpeedMultiplier = Animator.StringToHash("ReloadSpeedMultiplier");
 
         #endregion
 
@@ -49,16 +76,29 @@ namespace _GAME_.Scripts.Player
 
         private void Start()
         {
-            GetDataFromScriptable();
-            
             _mainCamera = Camera.main;
             _playerInputHandler = GetComponent<PlayerInputHandler>();
+
+            _animator = GetComponent<Animator>();
+            _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
+            _animator.runtimeAnimatorController = _animatorOverrideController;
+            
         }
 
         private void Update()
         {
-            HandleShooting();
+            if (_currentWeapon != null)
+            {
+                HandleShooting();
+                HandleReload();
+            }
             HandleMeleeAttack();
+
+            if (addWeapon)
+            {
+                addWeapon = false;
+                ChangeWeapon(weaponToAdd);
+            }
         }
 
         private void OnDrawGizmos()
@@ -76,53 +116,106 @@ namespace _GAME_.Scripts.Player
 
         #region Private Methods
 
-        private void GetDataFromScriptable()
+        private void ChangeWeapon(BaseRangedWeaponScriptableObject weaponScriptableObject)
         {
-            _playerWeaponData = Resources.Load<PlayerWeaponDataScriptableObject>(FolderPaths.WEAPON_DATA_PATH);
+            _weaponGameObject = Instantiate(weaponScriptableObject.Weapon.weaponPrefab, rightHandSocket);
+
+            _bulletSpawnPoint = _weaponGameObject.transform.GetChild(0);
             
-            _delayBetweenShots = _playerWeaponData.DelayBetweenShoots;
-            _weaponDamage = _playerWeaponData.WeaponDamage;
-            _meleeDamage = _playerWeaponData.MeleeDamage;
-            _weaponRange = _playerWeaponData.WeaponRange;
-            _bulletSpeed = _playerWeaponData.BulletSpeed;
-            _bulletPrefab = _playerWeaponData.BulletPrefab;
-            _maxAmmo = _playerWeaponData.MaxAmmo;
-            _hittableMask = _playerWeaponData.HittableLayerMask;
+            _currentWeapon = weaponScriptableObject.Weapon;
+            _weaponGameObject.transform.localPosition = _currentWeapon.weaponPositionOffset;
+            _weaponGameObject.transform.localRotation = Quaternion.Euler(_currentWeapon.weaponRotationOffset);
+            _weaponGameObject.transform.localScale = _currentWeapon.weaponScale;
+            
+            _animatorOverrideController["RightShootEmpty"] = _currentWeapon.shootAnimationClip;
+            _animatorOverrideController["RightReloadEmpty"] = _currentWeapon.reloadAnimationClip;
+
+            var animationLength = _currentWeapon.shootAnimationClip.length;
+            var desiredLength = _currentWeapon.delayBetweenShoots;
+            var speedMultiplier = desiredLength / animationLength;
+            
+            var reloadLength = _currentWeapon.reloadAnimationClip.length;
+            var desiredReloadLength = _currentWeapon.reloadTime;
+            var reloadSpeedMultiplier = desiredReloadLength / reloadLength;
+            
+            _animator.SetFloat(ShootSpeedMultiplier, speedMultiplier);
+            _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
+
+            _currentAmmo = _currentWeapon.maxAmmo;
+            
+            Push(CustomEvents.OnWeaponChanged);
         }
-        
+
+        #region Shooting
+
         private void HandleShooting()
         {
-            if (_playerInputHandler.IsFiring)
+            if (_playerInputHandler.IsFiring && !_isReloading && _currentAmmo > 0)
             {
-                if (_lastTimeShot + _delayBetweenShots < Time.time)
+                if (_lastTimeShot + _currentWeapon.delayBetweenShoots < Time.time)
                 {
                     HandleShoot();
                 }
             }
         }
-        
+
         // ReSharper disable Unity.PerformanceAnalysis
         private void HandleShoot()
         {
-            var currentBullet = Instantiate(this._bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            var currentBullet = Instantiate(_currentWeapon.bulletPrefab, _bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
-            
+            //StartCoroutine(ShootAnimation());
+            _animator.SetTrigger(ShootingTrigger);
+            _currentAmmo--;
+            Push(CustomEvents.OnBulletChange);
+
             var shootingDirection = _mainCamera.transform.forward;
             
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out var hit,
-                    _weaponRange, _hittableMask))
+                    _currentWeapon.weaponRange, _currentWeapon.hittableLayerMask))
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_weaponDamage, DamageType.Ranged, DamageCauser.Player);
+                    damageable.TakeDamage(_currentWeapon.weaponDamage, DamageType.Ranged, DamageCauser.Player);
                 }
                 
-                shootingDirection = (hit.point - bulletSpawnPoint.position).normalized;
+                shootingDirection = (hit.point - _bulletSpawnPoint.position).normalized;
             }
             
-            currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _bulletSpeed;
+            currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _currentWeapon.bulletSpeed;
         }
+
+        #endregion
+
+        #region Reloading
+
+        private void HandleReload()
+        {
+            if (_playerInputHandler.IsReloading)
+            {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (_currentAmmo == _currentWeapon.maxAmmo || _isReloading) return;
                 
+                StartCoroutine(ReloadWeapon());
+            }
+        }
+
+        // ReSharper disable Unity.PerformanceAnalysis
+        private IEnumerator ReloadWeapon()
+        {
+            _weaponGameObject.GetComponent<Animation>().Play();
+            _animator.SetTrigger(ReloadTrigger);
+            _isReloading = true;
+            yield return new WaitForSeconds(_currentWeapon.reloadTime);
+            _currentAmmo = _currentWeapon.maxAmmo;
+            _isReloading = false;
+            Push(CustomEvents.OnBulletChange);
+        }
+
+        #endregion
+
+        #region Melee Attack
+
         private void HandleMeleeAttack()
         {
             if (_playerInputHandler.IsMeleeAttacking && _canMeleeAttack)
@@ -137,7 +230,7 @@ namespace _GAME_.Scripts.Player
             Debug.Log("Melee Attacking");
             _canMeleeAttack = false;
             // ReSharper disable once Unity.PreferNonAllocApi
-            var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, AttackRangeTransform.rotation, _hittableMask,
+            var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, AttackRangeTransform.rotation, _currentWeapon.hittableLayerMask,
                 QueryTriggerInteraction.Collide);
 
             foreach (var enemy in colliders)
@@ -149,6 +242,17 @@ namespace _GAME_.Scripts.Player
             }
             yield return new WaitForSeconds(4f);
             _canMeleeAttack = true;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Public Methods
+
+        public string GetCurrentAmmoText()
+        {
+            return $"{_currentAmmo} / {_currentWeapon.maxAmmo}";
         }
 
         #endregion

@@ -55,7 +55,7 @@ namespace _GAME_.Scripts.Player
             MovePlayer();
             
             // Reduce the jump debounce timer if it's greater than 0
-            if(_jumpDebounce > 0)
+            if (_jumpDebounce > 0)
             {
                 _jumpDebounce -= Time.deltaTime;
             }
@@ -63,7 +63,7 @@ namespace _GAME_.Scripts.Player
             HandleJump();
             
             // Decrease the bunny hop timer
-            if(_justJumped)
+            if (_justJumped)
             {
                 _bunnyHopTimer -= Time.deltaTime;
                 

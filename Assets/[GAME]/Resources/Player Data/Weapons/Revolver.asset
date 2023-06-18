@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a98a5870be14db2856fd109d8f6723a, type: 3}
+  m_Name: Revolver
+  m_EditorClassIdentifier: 
+  weapon:
+    weaponPrefab: {fileID: 7154310232862037148, guid: aaf18aebc10f0c44db8d71237ace3bb0, type: 3}
+    weaponEffect: 1
+    delayBetweenShoots: 1
+    weaponDamage: 5
+    weaponRange: 80
+    bulletSpeed: 25
+    bulletPrefab: {fileID: 3330332147044356073, guid: 1bd4f0e1ab157054dbb7f3ca4c8be55e, type: 3}
+    reloadTime: 1
+    maxAmmo: 10
+    hittableLayerMask:
+      serializedVersion: 2
+      m_Bits: 72
+    weaponPositionOffset: {x: -0.000736, y: 0.000681, z: -0.000321}
+    weaponRotationOffset: {x: 270, y: 280.66376, z: 0}
+    weaponScale: {x: 0.01, y: 0.01, z: 0.01}
+    reloadAnimationClip: {fileID: 4100379159672190545, guid: 53d19c44bdd452544a811a451d923fba, type: 3}
+    shootAnimationClip: {fileID: 1473338503818673552, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

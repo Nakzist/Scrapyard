@@ -1,19 +1,25 @@
-﻿using UnityEngine;
+﻿using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.Models;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Ranged_Weapons
 {
+    [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Scrapyard/Data/Player/Weapon/Ranged Weapon")]
     public class BaseRangedWeaponScriptableObject : ScriptableObject
     {
         #region Serialied Fields
 
-        [SerializeField] private AnimationClip shootAnimationClip;
-
+        [SerializeField] private RangedWeapon weapon;
+        
         #endregion
 
         #region Public Fields
-
-        public AnimationClip ShootAnimationClip => shootAnimationClip;
+        
+        public RangedWeapon Weapon => weapon;
+        
 
         #endregion
+        
     }
 }

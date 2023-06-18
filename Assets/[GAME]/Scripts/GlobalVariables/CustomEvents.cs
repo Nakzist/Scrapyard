@@ -7,5 +7,8 @@
         public const string IncreaseSCore = "IncreaseScore";
         public const string OnPlayerDeath = "OnPlayerDeath";
         public const string OnHealthChanged = "OnHealthChanged";
+
+        public const string OnWeaponChanged = "OnWeaponChanged";
+        public const string OnBulletChange = "OnBulletChange";
     }
 }

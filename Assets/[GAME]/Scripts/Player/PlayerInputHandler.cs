@@ -14,6 +14,7 @@ namespace _GAME_.Scripts.Player
         public float VerticalLookInput => Input.GetAxisRaw("Mouse Y") * sensitivity;
         public bool IsSprinting => Input.GetButton("Sprint");
         public bool IsJumping => Input.GetButtonDown("Jump");
+        public bool IsReloading => Input.GetButtonDown("Reload");
         public bool IsFiring => Input.GetButton("Fire1");
         public bool IsMeleeAttacking => Input.GetButton("Fire2");
 
