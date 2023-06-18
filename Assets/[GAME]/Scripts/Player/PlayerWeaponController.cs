@@ -130,15 +130,17 @@ namespace _GAME_.Scripts.Player
             _animatorOverrideController["RightShootEmpty"] = _currentWeapon.shootAnimationClip;
             _animatorOverrideController["RightReloadEmpty"] = _currentWeapon.reloadAnimationClip;
 
-            var animationLength = _currentWeapon.shootAnimationClip.length;
-            var desiredLength = _currentWeapon.delayBetweenShoots;
-            var speedMultiplier = desiredLength / animationLength;
+            var shootLength = _currentWeapon.shootAnimationClip.length;
+            var desiredShootLength = _currentWeapon.delayBetweenShoots;
+            var shootSpeedMultiplier = shootLength / desiredShootLength;
             
             var reloadLength = _currentWeapon.reloadAnimationClip.length;
             var desiredReloadLength = _currentWeapon.reloadTime;
-            var reloadSpeedMultiplier = desiredReloadLength / reloadLength;
-            
-            _animator.SetFloat(ShootSpeedMultiplier, speedMultiplier);
+            var reloadSpeedMultiplier = reloadLength / desiredReloadLength;
+
+            _weaponGameObject.GetComponent<Animation>()["reload"].speed = reloadSpeedMultiplier;
+
+            _animator.SetFloat(ShootSpeedMultiplier, shootSpeedMultiplier);
             _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
 
             _currentAmmo = _currentWeapon.maxAmmo;
@@ -164,7 +166,6 @@ namespace _GAME_.Scripts.Player
         {
             var currentBullet = Instantiate(_currentWeapon.bulletPrefab, _bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
-            //StartCoroutine(ShootAnimation());
             _animator.SetTrigger(ShootingTrigger);
             _currentAmmo--;
             Push(CustomEvents.OnBulletChange);
@@ -227,7 +228,6 @@ namespace _GAME_.Scripts.Player
         // ReSharper disable Unity.PerformanceAnalysis
         private IEnumerator MeleeAttack()
         {
-            Debug.Log("Melee Attacking");
             _canMeleeAttack = false;
             // ReSharper disable once Unity.PreferNonAllocApi
             var colliders = Physics.OverlapBox(AttackRangeTransform.position, attackRange, AttackRangeTransform.rotation, _currentWeapon.hittableLayerMask,

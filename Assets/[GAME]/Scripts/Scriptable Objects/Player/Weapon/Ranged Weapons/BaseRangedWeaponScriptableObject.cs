@@ -1,7 +1,5 @@
-﻿using _GAME_.Scripts.Enums;
-using _GAME_.Scripts.Models;
+﻿using _GAME_.Scripts.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Ranged_Weapons
 {
