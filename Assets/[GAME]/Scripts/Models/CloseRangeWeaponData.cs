@@ -13,6 +13,7 @@ namespace _GAME_.Scripts.Models
         public float weaponRange = 20f;
         public float attackSpeed = 1f;
         public CloseRangeWeaponSkill weaponSkill;
+        public LayerMask hittableLayerMask;
         public Vector3 weaponPositionOffset;
         public Vector3 weaponRotationOffset;
         public Vector3 weaponScale;

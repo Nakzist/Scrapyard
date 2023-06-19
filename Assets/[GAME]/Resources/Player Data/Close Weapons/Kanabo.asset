@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8a49a4d1f44a8e98da407dc2cd872b, type: 3}
   m_Name: Kanabo
   m_EditorClassIdentifier: 
-  weaponData:
-    weaponPrefab: {fileID: 0}
+  weapon:
+    weaponPrefab: {fileID: 5313368778211839249, guid: 39de7005622758549aec7c448512cec8, type: 3}
     weaponDamage: 5
     weaponRange: 20
     attackSpeed: 1
     weaponSkill: 3
-    weaponPositionOffset: {x: 0, y: 0, z: 0}
-    weaponRotationOffset: {x: 0, y: 0, z: 0}
-    weaponScale: {x: 0, y: 0, z: 0}
+    hittableLayerMask:
+      serializedVersion: 2
+      m_Bits: 8
+    weaponPositionOffset: {x: -0.00297, y: 0.00131, z: -0.00118}
+    weaponRotationOffset: {x: 80.19183, y: 275.89395, z: 110.63681}
+    weaponScale: {x: 1, y: 1, z: 1}
     attackAnimationClip: {fileID: -667696598258144924, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

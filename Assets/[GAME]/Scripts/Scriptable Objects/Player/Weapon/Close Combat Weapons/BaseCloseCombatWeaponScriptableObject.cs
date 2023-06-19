@@ -1,5 +1,6 @@
 ﻿using _GAME_.Scripts.Models;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Close_Combat_Weapons
 {
@@ -8,13 +9,13 @@ namespace _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Close_Combat_Weapons
     {
         #region Serialied Fields
 
-        [SerializeField] private CloseRangeWeaponData weaponData;
+        [FormerlySerializedAs("weaponData")] [SerializeField] private CloseRangeWeaponData weapon;
 
         #endregion
 
         #region Public Fields
         
-        public CloseRangeWeaponData WeaponData => weaponData;
+        public CloseRangeWeaponData Weapon => weapon;
 
         #endregion
     }

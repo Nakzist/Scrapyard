@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8a49a4d1f44a8e98da407dc2cd872b, type: 3}
   m_Name: Katana
   m_EditorClassIdentifier: 
-  weaponData:
-    weaponPrefab: {fileID: 0}
+  weapon:
+    weaponPrefab: {fileID: 203306257127885995, guid: 5e9b78338a9f3b04c9628687ffa177c5, type: 3}
     weaponDamage: 5
     weaponRange: 20
     attackSpeed: 3
     weaponSkill: 1
-    weaponPositionOffset: {x: 0, y: 0, z: 0}
-    weaponRotationOffset: {x: 0, y: 0, z: 0}
-    weaponScale: {x: 0, y: 0, z: 0}
+    hittableLayerMask:
+      serializedVersion: 2
+      m_Bits: 8
+    weaponPositionOffset: {x: -0.001135, y: 0.001107, z: -0.000682}
+    weaponRotationOffset: {x: 2.0294461, y: 165.05891, z: 14.367763}
+    weaponScale: {x: 1, y: 1, z: 1}
     attackAnimationClip: {fileID: 8704013505302488091, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

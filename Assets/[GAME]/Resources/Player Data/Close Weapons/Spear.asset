@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8a49a4d1f44a8e98da407dc2cd872b, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
-  weaponData:
-    weaponPrefab: {fileID: 0}
+  weapon:
+    weaponPrefab: {fileID: 3759911192363309227, guid: 72b5ac11fd91ab042bfec53175479b52, type: 3}
     weaponDamage: 5
     weaponRange: 20
     attackSpeed: 2
     weaponSkill: 2
-    weaponPositionOffset: {x: 0, y: 0, z: 0}
-    weaponRotationOffset: {x: 0, y: 0, z: 0}
-    weaponScale: {x: 0, y: 0, z: 0}
+    hittableLayerMask:
+      serializedVersion: 2
+      m_Bits: 8
+    weaponPositionOffset: {x: -0.00813, y: 0.00145, z: -0.00292}
+    weaponRotationOffset: {x: 53.146687, y: 166.60876, z: 95.292786}
+    weaponScale: {x: 1, y: 1, z: 1}
     attackAnimationClip: {fileID: 5695187055724391568, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}
