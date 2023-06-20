@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace _GAME_.Scripts.Interactable
 {
@@ -15,6 +16,11 @@ namespace _GAME_.Scripts.Interactable
         {
             var ammo = Instantiate(ammoObjectPrefab, transform.position, Quaternion.identity);
             ammo.GetComponent<AmmoInteractable>().spawner = this;
+        }
+
+        private IEnumerator SpawnWithDelay()
+        {
+            yield return new WaitForSeconds(1f);
         }
     }
 }

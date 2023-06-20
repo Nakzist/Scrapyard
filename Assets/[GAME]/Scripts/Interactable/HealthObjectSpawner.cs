@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace _GAME_.Scripts.Interactable
 {
@@ -13,6 +14,12 @@ namespace _GAME_.Scripts.Interactable
 
         public void ObjectPickedUp()
         {
+            StartCoroutine(SpawnWithDelay());
+        }
+        
+        private IEnumerator SpawnWithDelay()
+        {
+            yield return new WaitForSeconds(5f);
             var health = Instantiate(healthObjectPrefab, transform.position, Quaternion.identity);
             health.GetComponent<HealthInteractable>().spawner = this;
         }
