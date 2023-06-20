@@ -359,6 +359,7 @@ namespace _GAME_.Scripts.Player
         public void IncreaseBullet(float value)
         {
             _currentBulletCount += value;
+            Push(CustomEvents.OnBulletChange);
         }
 
         public void AddWeapon(BaseRangedWeaponScriptableObject ranged, BaseCloseCombatWeaponScriptableObject close)

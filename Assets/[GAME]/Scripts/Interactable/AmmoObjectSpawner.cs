@@ -14,13 +14,14 @@ namespace _GAME_.Scripts.Interactable
 
         public void ObjectPickedUp()
         {
-            var ammo = Instantiate(ammoObjectPrefab, transform.position, Quaternion.identity);
-            ammo.GetComponent<AmmoInteractable>().spawner = this;
+            StartCoroutine(SpawnWithDelay());
         }
 
         private IEnumerator SpawnWithDelay()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
+            var ammo = Instantiate(ammoObjectPrefab, transform.position, Quaternion.identity);
+            ammo.GetComponent<AmmoInteractable>().spawner = this;
         }
     }
 }
