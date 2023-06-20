@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d68266b612b4021a5b33272cdaf431b, type: 3}
   m_Name: Kamikaze Bot Data
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 8
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
   maxHealth: 10
   attackRange: 10
   damage: 5
-  explosionRadius: 20
-  explosionDamage: 50
+  explosionRadius: 8
+  explosionDamage: 40
   explosionDelay: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a72019dcd147c18a175afb65f48f88, type: 3}
   m_Name: Vacuum Bot Data
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 14
   angularSpeed: 1440
   acceleration: 10
   rotationSpeed: 60
