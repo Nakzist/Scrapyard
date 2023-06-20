@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88970757553140595}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.00762, z: 1.59}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 1.5, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8310787636652727373}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6968146791523781650
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4062059585111598317}
-  m_LocalRotation: {x: -0.54866606, y: -0.44605565, z: -0.44605595, w: 0.5486657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.283414, y: 1.5718565, z: 1.899556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   gizmosRadius: 1
+  isBoss: 0
 --- !u!65 &3511826785753825728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -203,5 +204,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2.4780593}
-  m_Center: {x: 4.8339925e-15, y: 8.188258e-15, z: 1.2441118}
+  m_Size: {x: 1, y: 2.5412323, z: 1.0108697}
+  m_Center: {x: 0, y: 1.2654351, z: -0.0045654774}

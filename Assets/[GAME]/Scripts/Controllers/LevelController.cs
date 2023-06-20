@@ -152,6 +152,11 @@ namespace _GAME_.Scripts.Controllers
             }
 
             _levelFinished = true;
+
+            if (GameManager.Instance.currentLevel == 5)
+                return;
+            var audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
         }
 
         private void IncreaseScore()
