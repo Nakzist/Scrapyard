@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Level;
 using UnityEngine;
+using static _GAME_.Scripts.Currency.Currency;
 using Random = UnityEngine.Random;
 
 namespace _GAME_.Scripts.Controllers
@@ -15,9 +15,9 @@ namespace _GAME_.Scripts.Controllers
         #region Private Variables
 
         private float _lastSpawnTime;
+        // ReSharper disable once CollectionNeverQueried.Local
         private List<GameObject> _aliveEnemies;
         private List<Transform> _spawnPoints;
-        private LevelDataScriptableObject _levelDataScriptableObject;
         private Level _currentLevel;
 
         #endregion
@@ -26,12 +26,13 @@ namespace _GAME_.Scripts.Controllers
 
         private void Start()
         {            
-            _levelDataScriptableObject = Resources.Load<LevelDataScriptableObject>(FolderPaths.LEVEL_DATA_PATH);
-            GameManager.Instance.currentLevel++;
-            GameManager.Instance.score = 0;
-
-            _currentLevel = _levelDataScriptableObject.Levels[(GameManager.Instance.currentLevel - 1)];
+            GetLevelData();
             
+            if(GetCurrency() == 0)
+                AddCurrency(2);
+            
+            //create hud for crafting
+
             var parent = transform.GetChild(2);
             _spawnPoints = new List<Transform>();
             _aliveEnemies = new List<GameObject>();
@@ -39,12 +40,6 @@ namespace _GAME_.Scripts.Controllers
             foreach (Transform child in parent)
             {
                 _spawnPoints.Add(child);
-            }
-
-            if (GameManager.Instance == null)
-            {
-                var manager = new GameObject("GameManager");
-                manager.AddComponent<GameManager>();
             }
         }
 
@@ -100,8 +95,24 @@ namespace _GAME_.Scripts.Controllers
             }
             if (GameManager.Instance.score >= _currentLevel.winScore)
             {
+                AddCurrency(2); //Add 2 currency for winning
                 GameManager.Instance.Win();
             }
+        }
+        
+        private void GetLevelData()
+        {
+            var levelDataScriptableObject = Resources.Load<LevelDataScriptableObject>(FolderPaths.LEVEL_DATA_PATH);
+            if (GameManager.Instance == null)
+            {
+                var manager = new GameObject("GameManager");
+                manager.AddComponent<GameManager>();
+            }
+
+            GameManager.Instance.currentLevel++;
+            GameManager.Instance.score = 0;
+            
+            _currentLevel = levelDataScriptableObject.Levels[(GameManager.Instance.currentLevel - 1)];
         }
 
         #endregion

@@ -32,6 +32,7 @@ namespace _GAME_.Scripts.Player
         private float _bunnyHopWindow;
         private float _bunnyHopBoost;
         private float _jumpDebounceTime;
+        private static readonly int Speed = Animator.StringToHash("Speed");
 
         #endregion
 
@@ -113,12 +114,12 @@ namespace _GAME_.Scripts.Player
             var t = transform;
             var playerMovement = t.forward * _playerInputHandler.VerticalMovement +
                                  t.right * _playerInputHandler.HorizontalMovement;
-            playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed * Time.deltaTime;
+            playerMovement *= _playerInputHandler.IsSprinting ? _sprintMoveSpeed : _moveSpeed;
             playerMovement.y += _rb.velocity.y;
             _rb.velocity = playerMovement;
             
             var speed = playerMovement.magnitude;
-            _animator.SetFloat("Speed", speed); // Use the speed to control the animator
+            _animator.SetFloat(Speed, speed); // Use the speed to control the animator
         }
         
         private void HandleJump()
