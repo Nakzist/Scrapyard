@@ -52,6 +52,8 @@ namespace _GAME_.Scripts.Currency
             
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            
+            
         }
 
         #endregion
@@ -60,7 +62,7 @@ namespace _GAME_.Scripts.Currency
 
         #region CloseRange
 
-        public void SelectCleaver()
+        public void SelectCleaver(GameObject obj)
         {
             if(!CleaverUnlocked)
             {
@@ -68,6 +70,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     CleaverUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Cleaver;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -78,7 +81,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
 
-        public void SelectKanabo()
+        public void SelectKanabo(GameObject obj)
         {
             if (!KanaboUnlocked)
             {
@@ -86,6 +89,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     KanaboUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Kanabo;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -95,7 +99,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
 
-        public void SelectKatana()
+        public void SelectKatana(GameObject obj)
         {
             if (!KatanaUnlocked)
             {
@@ -103,6 +107,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     KatanaUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Katana;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -112,7 +117,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
         
-        public void SelectSpear()
+        public void SelectSpear(GameObject obj)
         {
             if (!SpearUnlocked)
             {
@@ -120,6 +125,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     SpearUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Spear;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -133,7 +139,7 @@ namespace _GAME_.Scripts.Currency
 
         #region Ranged
 
-        public void SelectDoubleBarrel()
+        public void SelectDoubleBarrel(GameObject obj)
         {
             if (!DoubleBarrelUnlocked)
             {
@@ -141,6 +147,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     DoubleBarrelUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.DoubleBarrel;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -150,7 +157,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
 
-        public void SelectGrenadeLauncher()
+        public void SelectGrenadeLauncher(GameObject obj)
         {
             if (!GrenadeLauncherUnlocked)
             {
@@ -158,6 +165,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     GrenadeLauncherUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.GrenadeLauncher;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -167,7 +175,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
         
-        public void SelectMinigun()
+        public void SelectMinigun(GameObject obj)
         {
             if (!MinigunUnlocked)
             {
@@ -175,6 +183,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     MinigunUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.Minigun;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -184,7 +193,7 @@ namespace _GAME_.Scripts.Currency
             UpdateUI();
         }
         
-        public void SelectRevolver()
+        public void SelectRevolver(GameObject obj)
         {
             if (!RevolverUnlocked)
             {
@@ -192,6 +201,7 @@ namespace _GAME_.Scripts.Currency
                 {
                     RevolverUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.Revolver;
+                    obj.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
             else
@@ -203,7 +213,7 @@ namespace _GAME_.Scripts.Currency
 
         #endregion
 
-        public void AcceptButton()
+        public void AcceptButton(GameObject obj)
         {
             var selectedCloseWeapon = _selectedCloseRangeWeapon switch
             {
