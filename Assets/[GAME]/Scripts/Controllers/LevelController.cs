@@ -5,8 +5,8 @@ using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Level;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static _GAME_.Scripts.Currency.Currency;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace _GAME_.Scripts.Controllers
@@ -24,6 +24,14 @@ namespace _GAME_.Scripts.Controllers
         private WinConditions _currentWinCondition;
         private float _currentWinConditionTargetValue;
         private int _currentWinConditionIndex;
+
+        private bool _levelFinished;
+
+        #endregion
+
+        #region Serialized Variables
+
+        [FormerlySerializedAs("_craftHud")] [SerializeField] private GameObject craftHud;
 
         #endregion
 
@@ -63,11 +71,14 @@ namespace _GAME_.Scripts.Controllers
                 AddCurrency(2);
             
             //create hud for crafting
+            Instantiate(craftHud);
 
         }
 
         private void Update()
         {
+            if (!_levelFinished) return;
+            
             if (_currentLevel.enemiesToSpawn.Count >0)
                 SpawnEnemy();
             
@@ -123,6 +134,8 @@ namespace _GAME_.Scripts.Controllers
             {
                 _spawnPoints.Add(child);
             }
+
+            _levelFinished = true;
         }
 
         private void IncreaseScore()

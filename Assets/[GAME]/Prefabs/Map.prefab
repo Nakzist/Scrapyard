@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb56dad20ba444195bc6c82a204e56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _craftHud: {fileID: 3194466176959297327, guid: d77af135960da2d40bcd2cd0503ce501, type: 3}
 --- !u!1001 &6381448643934899888
 PrefabInstance:
   m_ObjectHideFlags: 0

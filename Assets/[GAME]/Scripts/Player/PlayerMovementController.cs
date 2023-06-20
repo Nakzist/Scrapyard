@@ -41,9 +41,6 @@ namespace _GAME_.Scripts.Player
         private void Start()
         {
             GetDataFromScriptable();
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
             _playerInputHandler = GetComponent<PlayerInputHandler>();

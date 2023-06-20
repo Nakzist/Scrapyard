@@ -4,6 +4,16 @@ namespace _GAME_.Scripts.Currency
     {
         private static int _currency;
         
+        public static bool CleaverUnlocked;
+        public static bool KanaboUnlocked;
+        public static bool KatanaUnlocked = true;
+        public static bool SpearUnlocked;
+        
+        public static bool DoubleBarrelUnlocked;
+        public static bool GrenadeLauncherUnlocked;
+        public static bool MinigunUnlocked;
+        public static bool RevolverUnlocked = true;
+        
         public static void AddCurrency(int amount)
         {
             _currency += amount;

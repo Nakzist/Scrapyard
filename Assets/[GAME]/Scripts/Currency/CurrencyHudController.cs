@@ -28,18 +28,8 @@ namespace _GAME_.Scripts.Currency
         
         #region Private Variables
 
-        private bool _cleaverUnlocked;
-        private bool _kanaboUnlocked;
-        private bool _katanaUnlocked = true;
-        private bool _spearUnlocked;
-
         private CloseRangeWeaponSkill _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Katana;
 
-        private bool _doubleBarrelUnlocked;
-        private bool _grenadeLauncherUnlocked;
-        private bool _minigunUnlocked;
-        private bool _revolverUnlocked = true;
-        
         private RangedWeaponsEnum _selectedRangeWeapon = RangedWeaponsEnum.Revolver;
         
         private TextMeshProUGUI _currencyText;
@@ -59,6 +49,9 @@ namespace _GAME_.Scripts.Currency
             _rangedWeaponText = transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
             
             UpdateUI();
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         #endregion
@@ -69,11 +62,11 @@ namespace _GAME_.Scripts.Currency
 
         public void SelectCleaver()
         {
-            if(!_cleaverUnlocked)
+            if(!CleaverUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _cleaverUnlocked = true;
+                    CleaverUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Cleaver;
                 }
             }
@@ -87,11 +80,11 @@ namespace _GAME_.Scripts.Currency
 
         public void SelectKanabo()
         {
-            if (!_kanaboUnlocked)
+            if (!KanaboUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _kanaboUnlocked = true;
+                    KanaboUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Kanabo;
                 }
             }
@@ -104,11 +97,11 @@ namespace _GAME_.Scripts.Currency
 
         public void SelectKatana()
         {
-            if (!_katanaUnlocked)
+            if (!KatanaUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _katanaUnlocked = true;
+                    KatanaUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Katana;
                 }
             }
@@ -121,11 +114,11 @@ namespace _GAME_.Scripts.Currency
         
         public void SelectSpear()
         {
-            if (!_spearUnlocked)
+            if (!SpearUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _spearUnlocked = true;
+                    SpearUnlocked = true;
                     _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Spear;
                 }
             }
@@ -142,11 +135,11 @@ namespace _GAME_.Scripts.Currency
 
         public void SelectDoubleBarrel()
         {
-            if (!_doubleBarrelUnlocked)
+            if (!DoubleBarrelUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _doubleBarrelUnlocked = true;
+                    DoubleBarrelUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.DoubleBarrel;
                 }
             }
@@ -159,11 +152,11 @@ namespace _GAME_.Scripts.Currency
 
         public void SelectGrenadeLauncher()
         {
-            if (!_grenadeLauncherUnlocked)
+            if (!GrenadeLauncherUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _grenadeLauncherUnlocked = true;
+                    GrenadeLauncherUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.GrenadeLauncher;
                 }
             }
@@ -176,11 +169,11 @@ namespace _GAME_.Scripts.Currency
         
         public void SelectMinigun()
         {
-            if (!_minigunUnlocked)
+            if (!MinigunUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _minigunUnlocked = true;
+                    MinigunUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.Minigun;
                 }
             }
@@ -193,11 +186,11 @@ namespace _GAME_.Scripts.Currency
         
         public void SelectRevolver()
         {
-            if (!_revolverUnlocked)
+            if (!RevolverUnlocked)
             {
                 if (SpendCurrency(1))
                 {
-                    _revolverUnlocked = true;
+                    RevolverUnlocked = true;
                     _selectedRangeWeapon = RangedWeaponsEnum.Revolver;
                 }
             }
@@ -233,6 +226,11 @@ namespace _GAME_.Scripts.Currency
             GameManager.Instance.currentPlayer.PlayerWeaponController.AddWeapon(selectedRangedWeapon, selectedCloseWeapon);
             
             Push(CustomEvents.WeaponSelected);
+            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            Destroy(gameObject);
         }
 
         #endregion

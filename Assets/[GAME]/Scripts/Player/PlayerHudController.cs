@@ -82,6 +82,9 @@ namespace _GAME_.Scripts.Player
             var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
             image.sprite = _waveSprites[GameManager.Instance.currentLevel];
             image.gameObject.SetActive(true);
+            
+            WeaponChange();
+            UpdateWeaponAmmo();
         }
 
         private void ShowLosePanel()
@@ -107,11 +110,13 @@ namespace _GAME_.Scripts.Player
 
         private void WeaponChange()
         {
+            if (_ammoText == null) return;
             _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
         }
         
         private void UpdateWeaponAmmo()
         {
+            if (_ammoText == null) return;
             _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
         }
 
