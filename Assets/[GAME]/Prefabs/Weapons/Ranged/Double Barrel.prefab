@@ -84,9 +84,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
-  - {fileID: -114096980323844866, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
-  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: 3060590680633229496, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: -114096980323844866, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: -2293238839597214331, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ Transform:
   - {fileID: 779423776378493760}
   - {fileID: 5752989907697633446}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &5067921974697347793
 Animation:
@@ -352,9 +352,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
-  - {fileID: -5899304328823496567, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
-  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: -2293238839597214331, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: -5899304328823496567, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: -7908028259305023846, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

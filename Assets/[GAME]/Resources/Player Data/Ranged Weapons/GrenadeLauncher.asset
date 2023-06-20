@@ -21,8 +21,7 @@ MonoBehaviour:
     bulletSpeed: 25
     bulletPrefab: {fileID: 3330332147044356073, guid: 1bd4f0e1ab157054dbb7f3ca4c8be55e, type: 3}
     reloadTime: 3
-    magSize: 4
-    maxAmmo: 10
+    maxAmmo: 5
     hittableLayerMask:
       serializedVersion: 2
       m_Bits: 192

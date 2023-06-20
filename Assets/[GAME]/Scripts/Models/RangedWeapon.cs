@@ -1,7 +1,6 @@
 ﻿using System;
 using _GAME_.Scripts.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Models
 {
@@ -17,8 +16,7 @@ namespace _GAME_.Scripts.Models
         public float bulletSpeed = 25f;
         public GameObject bulletPrefab;
         public float reloadTime = 1f;
-        public float magSize = 10f;
-        public float bulletCount = 100f;
+        public float maxAmmo = 10f;
         public LayerMask hittableLayerMask;
         public Vector3 weaponPositionOffset;
         public Vector3 weaponRotationOffset;
