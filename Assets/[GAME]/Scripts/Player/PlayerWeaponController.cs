@@ -173,7 +173,7 @@ namespace _GAME_.Scripts.Player
             _animator.SetFloat(ShootSpeedMultiplier, shootSpeedMultiplier);
             _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
 
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            _currentAmmo = _currentRangedWeapon.magSize;
             
             Push(CustomEvents.OnWeaponChanged);
         }
@@ -236,8 +236,9 @@ namespace _GAME_.Scripts.Player
         {
             if (_playerInputHandler.IsReloading)
             {
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (_currentAmmo == _currentRangedWeapon.maxAmmo || _isReloading) return;
+                if (_currentRangedWeapon.bulletCount > 0) return;
+                    // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (_currentAmmo == _currentRangedWeapon.magSize || _isReloading) return;
                 
                 StartCoroutine(ReloadWeapon());
             }
@@ -250,7 +251,8 @@ namespace _GAME_.Scripts.Player
             _animator.SetTrigger(ReloadTrigger);
             _isReloading = true;
             yield return new WaitForSeconds(_currentRangedWeapon.reloadTime);
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            var bulletToAdd = Mathf.Max(_currentRangedWeapon.bulletCount - _currentRangedWeapon.magSize, _currentRangedWeapon.bulletCount);
+            _currentAmmo = bulletToAdd;
             _isReloading = false;
             Push(CustomEvents.OnBulletChange);
         }
@@ -323,7 +325,7 @@ namespace _GAME_.Scripts.Player
 
         public string GetCurrentAmmoText()
         {
-            return $"{_currentAmmo} / {_currentRangedWeapon.maxAmmo}";
+            return $"{_currentAmmo} / {_currentRangedWeapon.magSize}";
         }
 
         public void GiveMeleeDamageBoost()
