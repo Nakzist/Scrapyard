@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4618801079fe4444ad876bfe90f44911, type: 3}
   m_Name: Boss Data
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 20
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10
-  maxHealth: 10
+  maxHealth: 400
   attackRange: 10
-  damage: 5
+  damage: 20
+  chargeDuration: 3

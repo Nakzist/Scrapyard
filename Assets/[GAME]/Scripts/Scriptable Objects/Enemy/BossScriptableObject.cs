@@ -7,13 +7,13 @@ namespace _GAME_.Scripts.Scriptable_Objects.Enemy
     {
         #region Serialized Variables
 
-
+        [SerializeField] private float chargeDuration = 2f;
 
         #endregion
 
         #region Public Variables
 
-
+        public float ChargeDuration => chargeDuration;
 
         #endregion
     }

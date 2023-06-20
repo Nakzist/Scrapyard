@@ -123,67 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &16487493
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.7518692
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991201, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879593476874991205, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
-      propertyPath: m_Name
-      value: "Krali\xE7e"
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7addbaa69860b714dbd5137a75e3f48d, type: 3}
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 6382212566048626182, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
@@ -250,7 +189,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1121915823
 PrefabInstance:
@@ -262,7 +201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3943978077231922820, guid: 199c11e47c4627d418d8219a2b8bfc67, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3943978077231922820, guid: 199c11e47c4627d418d8219a2b8bfc67, type: 3}
       propertyPath: m_LocalPosition.x
@@ -379,7 +318,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6382212565678810268
 PrefabInstance:
@@ -432,6 +371,10 @@ PrefabInstance:
     - target: {fileID: 1288055177016212781, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5841628147394525476, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
+      propertyPath: _levelIndex
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6074824192487748577, guid: 404f2fd1dac2bdd4ca6463fee201cdae, type: 3}
       propertyPath: m_StaticEditorFlags

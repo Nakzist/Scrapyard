@@ -21,7 +21,7 @@ MonoBehaviour:
     hittableLayerMask:
       serializedVersion: 2
       m_Bits: 8
-    weaponPositionOffset: {x: -0.00813, y: 0.00145, z: -0.00292}
-    weaponRotationOffset: {x: 53.146687, y: 166.60876, z: 95.292786}
+    weaponPositionOffset: {x: 0.00991, y: -0.00826, z: -0.00545}
+    weaponRotationOffset: {x: 5.887844, y: 277.2888, z: 232.5648}
     weaponScale: {x: 1, y: 1, z: 1}
     attackAnimationClip: {fileID: 5695187055724391568, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

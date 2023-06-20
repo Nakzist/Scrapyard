@@ -27,6 +27,8 @@ namespace _GAME_.Scripts.Player
         [SerializeField] private bool addCloseRangeWeapon;
         [SerializeField] private BaseCloseCombatWeaponScriptableObject closeRangeWeaponToAdd;
 
+        [SerializeField] private AudioClip shootSoundClip;
+
         #endregion
 
         #region Private Variables
@@ -41,6 +43,8 @@ namespace _GAME_.Scripts.Player
 
         private float _lastTimeShot;
         private bool _isReloading;
+
+        private AudioSource _audioSource;
 
         #endregion
 
@@ -91,6 +95,7 @@ namespace _GAME_.Scripts.Player
             _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
             _animator.runtimeAnimatorController = _animatorOverrideController;
             
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -211,6 +216,8 @@ namespace _GAME_.Scripts.Player
             _animator.SetTrigger(ShootingTrigger);
             _currentAmmo--;
             Push(CustomEvents.OnBulletChange);
+            
+            _audioSource.PlayOneShot(shootSoundClip);
 
             var shootingDirection = _mainCamera.transform.forward;
             

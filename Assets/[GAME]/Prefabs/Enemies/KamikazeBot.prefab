@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2468762340892923237}
   - component: {fileID: 8061796297357365414}
   - component: {fileID: 7976151987273042517}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: playermodel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1721879836190719926}
   - component: {fileID: 1939736623783440629}
   - component: {fileID: 5576231952646392361}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cube.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   gizmosRadius: 1
+  isBoss: 0
 --- !u!136 &5246813913643073429
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ GameObject:
   - component: {fileID: 8630718372821573238}
   - component: {fileID: 698232691814172830}
   - component: {fileID: 5881185695361896207}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: playermodel.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +387,7 @@ GameObject:
   - component: {fileID: 1295481043849789412}
   - component: {fileID: 1243254394111738620}
   - component: {fileID: 3088751360154154959}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cube.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +470,7 @@ GameObject:
   - component: {fileID: 8731399695522195185}
   - component: {fileID: 1449102434177707227}
   - component: {fileID: 9182053058050813025}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: BezierCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

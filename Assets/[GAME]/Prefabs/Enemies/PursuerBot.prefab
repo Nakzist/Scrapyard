@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6187595766600015440}
   - component: {fileID: 4029999938864588160}
   - component: {fileID: 7004812720998449715}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5750945668750649862}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: breast.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9085434803001412423}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: breast.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8127806368035840346}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: shoulder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5532735358936651359}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4716375070054233056}
   - component: {fileID: 3663664982440679495}
   - component: {fileID: 8809534424477191925}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8249168771259977745}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 8168007082846417590}
   - component: {fileID: 2162966478701440389}
   - component: {fileID: 5443933004788310851}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: BezierCurve.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8362033038518699173}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6481238435689207894}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: face_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4923811442561682426}
   - component: {fileID: 5293998841378971191}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: playermodel.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,6 +679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   gizmosRadius: 1
+  isBoss: 0
 --- !u!54 &4483385674359549879
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -715,7 +716,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7934940179006626422}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: metarig.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1942443818597360236}
   - component: {fileID: 8399349886698558291}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: playermodel.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -851,7 +852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2814596469729512283}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: forearm.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034176782295991457}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: pelvis.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9047094764287578985}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +949,7 @@ GameObject:
   - component: {fileID: 9041454591318780152}
   - component: {fileID: 8198724532441460646}
   - component: {fileID: 3477299408269176937}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4387029167330446760}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: pelvis.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4203970250507652348}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8249707996837594913}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: upper_arm.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7007830638842792680}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580826204492987220}
   - component: {fileID: 8148203535837203366}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: playermodel.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1256,7 +1257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7135193700373163599}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1290,7 +1291,7 @@ GameObject:
   - component: {fileID: 1284195754051867958}
   - component: {fileID: 8022237535908130441}
   - component: {fileID: 5984840345130523195}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 802283963838756650}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: breast.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,7 +1404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012282059472651269}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Empty.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1434,7 +1435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8197068110450350685}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: upper_arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,7 +1467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4382286965496544059}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: forearm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,7 +1502,7 @@ GameObject:
   - component: {fileID: 3501618379347369367}
   - component: {fileID: 427177010362510240}
   - component: {fileID: 8859393965851150504}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8772159266334690911}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: pelvis.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5897934766303123946}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: pelvis.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1645,7 +1646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5843921578699220479}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: upper_arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5232568991628500450}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: breast.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1710,7 +1711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7879564310936526347}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1744,7 +1745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4617260761266177701}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: shoulder.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

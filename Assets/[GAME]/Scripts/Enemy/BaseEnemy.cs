@@ -37,6 +37,7 @@ namespace _GAME_.Scripts.Enemy
         [Header("Interaction Settings")]
         [SerializeField] private bool drawGizmos = false;
         [SerializeField] private float gizmosRadius = 1f;
+        [SerializeField] private bool isBoss = false;
 
         #endregion
 
@@ -169,15 +170,24 @@ namespace _GAME_.Scripts.Enemy
 
         private protected virtual void EnemyDeath(DamageCauser damageCauser)
         {
-            GameManager.Instance.aliveEnemies.Remove(gameObject);
+            if (!isBoss)
+            {
+                GameManager.Instance.aliveEnemies.Remove(gameObject);
             
-            if(damageCauser == DamageCauser.Player)
-                Push(CustomEvents.OnEnemyDeath);
+                if(damageCauser == DamageCauser.Player)
+                    Push(CustomEvents.OnEnemyDeath);
             
-            if(_deathByCloseCombat)
-                Push(CustomEvents.OnEnemyDeathClose);
+                if(_deathByCloseCombat)
+                    Push(CustomEvents.OnEnemyDeathClose);
             
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
+            else
+            {
+                GameManager.Instance.aliveEnemies.Remove(gameObject);
+                Push(CustomEvents.OnQueenDeath);
+                Destroy(gameObject);
+            }
         }
 
         #endregion

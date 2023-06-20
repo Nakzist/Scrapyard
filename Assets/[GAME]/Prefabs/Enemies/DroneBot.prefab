@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   gizmosRadius: 1
+  isBoss: 0
 --- !u!136 &3104713380817587396
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -241,11 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1599826595754709761, guid: ba8be19c5a20343deb7178a3aea69d7e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -208595431880416365, guid: ba8be19c5a20343deb7178a3aea69d7e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ba8be19c5a20343deb7178a3aea69d7e, type: 3}
       propertyPath: m_Name
@@ -253,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ba8be19c5a20343deb7178a3aea69d7e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ba8be19c5a20343deb7178a3aea69d7e, type: 3}
       propertyPath: m_IsActive

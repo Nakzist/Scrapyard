@@ -56,17 +56,14 @@ MonoBehaviour:
     - {fileID: 2376231280656956480, guid: a7038b7934eaf6b4aa00816190abe455, type: 3}
     spawnRate: 3
     winCondition1: 0
-    winCondition1Value: 0
+    winCondition1Value: 50
     winCondition2: 0
-    winCondition2Value: 0
+    winCondition2Value: 45
     winCondition3: 0
-    winCondition3Value: 0
+    winCondition3Value: 50
   - enemiesToSpawn:
-    - {fileID: 3104713380817587402, guid: 2083e062a80d8df429553fd5cb4c8ee6, type: 3}
-    - {fileID: 6472793549743410360, guid: f6a567184f49cb24f803087544dca808, type: 3}
-    - {fileID: 4062059585111598317, guid: eb5de6a1537064446a6ea6e9cf2aad81, type: 3}
-    - {fileID: 2376231280656956480, guid: a7038b7934eaf6b4aa00816190abe455, type: 3}
-    spawnRate: 5
+    - {fileID: 9090042374066181314, guid: ab255a31edc2a3847b79eb3db94df38f, type: 3}
+    spawnRate: 1
     winCondition1: 2
     winCondition1Value: 0
     winCondition2: 0

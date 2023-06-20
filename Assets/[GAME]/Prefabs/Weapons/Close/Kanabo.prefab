@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4403190014537558818}
   - component: {fileID: 1563389458127245822}
   - component: {fileID: 2325583824118579853}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Kanabo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

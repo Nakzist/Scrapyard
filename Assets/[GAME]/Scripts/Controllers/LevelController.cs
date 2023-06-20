@@ -26,42 +26,18 @@ namespace _GAME_.Scripts.Controllers
         private int _currentWinConditionIndex;
 
         private bool _levelFinished;
+        private bool _queenSpawned;
 
         #endregion
 
         #region Serialized Variables
 
         [FormerlySerializedAs("_craftHud")] [SerializeField] private GameObject craftHud;
+        [SerializeField] private int _levelIndex;
 
         #endregion
 
         #region Monobehaviour Methods
-
-        private void IncreaseCurrentWinCondition()
-        {
-            _currentWinConditionIndex++;
-            GameManager.Instance.score = 0;
-
-            switch (_currentWinConditionIndex)
-            {
-                case 1:
-                    _currentWinCondition = _currentLevel.winCondition1;
-                    _currentWinConditionTargetValue = _currentLevel.winCondition1Value;
-                    break;
-                case 2:
-                    _currentWinCondition = _currentLevel.winCondition2;
-                    _currentWinConditionTargetValue = _currentLevel.winCondition2Value;
-                    break;
-                case 3:
-                    _currentWinCondition = _currentLevel.winCondition3;
-                    _currentWinConditionTargetValue = _currentLevel.winCondition3Value;
-                    break;
-                case 4:
-                    AddCurrency(2); //Add 2 currency for winning
-                    GameManager.Instance.Win();
-                    break;
-            }
-        }
 
         private void Start()
         {            
@@ -77,18 +53,33 @@ namespace _GAME_.Scripts.Controllers
         private void Update()
         {
             if (!_levelFinished) return;
-            
-            if (_currentLevel.enemiesToSpawn.Count >0)
-                SpawnEnemy();
-            
-            if (_currentWinCondition == WinConditions.Time)
+
+            if (GameManager.Instance.currentLevel != 5)
             {
-                _currentWinConditionTargetValue -= Time.deltaTime;
-                GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText(Mathf.Ceil(_currentWinConditionTargetValue) + " seconds left to win");
-                //winConditionText.text = Mathf.Ceil(timeToSurvive) + " seconds left to win";
-                if (_currentWinConditionTargetValue <= 0)
+                if (_currentLevel.enemiesToSpawn.Count > 0)
+                    SpawnEnemy();
+            
+                if (_currentWinCondition == WinConditions.Time)
                 {
-                    IncreaseCurrentWinCondition();
+                    _currentWinConditionTargetValue -= Time.deltaTime;
+                    GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText(Mathf.Ceil(_currentWinConditionTargetValue) + " seconds left to win");
+                    //winConditionText.text = Mathf.Ceil(timeToSurvive) + " seconds left to win";
+                    if (_currentWinConditionTargetValue <= 0)
+                    {
+                        IncreaseCurrentWinCondition();
+                    }
+                }
+            }
+            else
+            {
+                if (!_queenSpawned)
+                {
+                    var spawnPointIndex = Random.Range(0, _spawnPoints.Count);
+                    var enemyIndex = Random.Range(0, _currentLevel.enemiesToSpawn.Count);
+                    var enemy = Instantiate(_currentLevel.enemiesToSpawn[0], _spawnPoints[spawnPointIndex].position,
+                        Quaternion.identity);
+                    if(enemy != null) _aliveEnemies.Add(enemy);
+                    _queenSpawned = true;
                 }
             }
         }
@@ -118,6 +109,32 @@ namespace _GAME_.Scripts.Controllers
                 var enemyIndex = Random.Range(0, _currentLevel.enemiesToSpawn.Count);
                 var enemy = Instantiate(_currentLevel.enemiesToSpawn[enemyIndex], _spawnPoints[spawnPointIndex].position, Quaternion.identity);
                 if (enemy != null) _aliveEnemies.Add(enemy);
+            }
+        }
+        
+        private void IncreaseCurrentWinCondition()
+        {
+            _currentWinConditionIndex++;
+            GameManager.Instance.score = 0;
+
+            switch (_currentWinConditionIndex)
+            {
+                case 1:
+                    _currentWinCondition = _currentLevel.winCondition1;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition1Value;
+                    break;
+                case 2:
+                    _currentWinCondition = _currentLevel.winCondition2;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition2Value;
+                    break;
+                case 3:
+                    _currentWinCondition = _currentLevel.winCondition3;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition3Value;
+                    break;
+                case 4:
+                    AddCurrency(2); //Add 2 currency for winning
+                    GameManager.Instance.Win();
+                    break;
             }
         }
 
@@ -158,7 +175,7 @@ namespace _GAME_.Scripts.Controllers
                 manager.AddComponent<GameManager>();
             }
 
-            GameManager.Instance.currentLevel++;
+            GameManager.Instance.currentLevel = _levelIndex;
             GameManager.Instance.score = 0;
             
             _currentLevel = levelDataScriptableObject.Levels[(GameManager.Instance.currentLevel - 1)];

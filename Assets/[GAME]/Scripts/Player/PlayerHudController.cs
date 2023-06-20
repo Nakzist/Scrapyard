@@ -80,7 +80,8 @@ namespace _GAME_.Scripts.Player
             _ammoText = _hudInstance.transform.GetChild(0).GetChild(6).GetComponent<TextMeshProUGUI>();
 
             var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
-            image.sprite = _waveSprites[GameManager.Instance.currentLevel];
+            if(_waveSprites.Count > GameManager.Instance.currentLevel)
+                image.sprite = _waveSprites[GameManager.Instance.currentLevel];
             image.gameObject.SetActive(true);
             
             WeaponChange();
@@ -94,6 +95,9 @@ namespace _GAME_.Scripts.Player
 
         private void ShowHp()
         {
+            if(GameManager.Instance == null)
+                return;
+            
             if (GameManager.Instance.currentPlayer == null)
             {
                 if(_hpText == null)

@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   gizmosRadius: 1
+  isBoss: 0
 --- !u!1001 &6977478107595639987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +188,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6bcdf775c6dfcc246ad3020d9780e94c, type: 3}
       propertyPath: m_Name
       value: vacumm_new
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bcdf775c6dfcc246ad3020d9780e94c, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
