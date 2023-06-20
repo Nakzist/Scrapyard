@@ -23,8 +23,9 @@ namespace _GAME_.Scripts.Currency
         {
             var currentCurrency = _currency - amount;
 
-            if (amount < 0)
+            if (currentCurrency < 0)
             {
+                currentCurrency = 0;
                 return false;
             }
 
