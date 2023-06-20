@@ -173,6 +173,7 @@ namespace _GAME_.Scripts.Player
             _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
 
             _currentAmmo = _currentRangedWeapon.magSize;
+            _currentBulletCount = _currentRangedWeapon.bulletCount;
             
             Push(CustomEvents.OnWeaponChanged);
         }
@@ -251,10 +252,10 @@ namespace _GAME_.Scripts.Player
             _isReloading = true;
             yield return new WaitForSeconds(_currentRangedWeapon.reloadTime);
             var bulletToAdd = _currentBulletCount - _currentRangedWeapon.magSize;
-            if(bulletToAdd < 0)
-                bulletToAdd = _currentBulletCount;
+            var magAmmoCount = _currentAmmo;
+            bulletToAdd = bulletToAdd < 0 ? _currentBulletCount : _currentRangedWeapon.magSize;
             _currentAmmo = bulletToAdd;
-            _currentBulletCount -= bulletToAdd;
+            _currentBulletCount -= (bulletToAdd - magAmmoCount);
             _isReloading = false;
             Push(CustomEvents.OnBulletChange);
         }
@@ -327,7 +328,7 @@ namespace _GAME_.Scripts.Player
 
         public string GetCurrentAmmoText()
         {
-            return $"{_currentAmmo} / {_currentRangedWeapon.bulletCount}";
+            return $"{_currentAmmo} / {_currentBulletCount}";
         }
 
         public void GiveMeleeDamageBoost()
