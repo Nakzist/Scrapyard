@@ -127,6 +127,10 @@ namespace _GAME_.Scripts.Enemy
         {
             var dir = target.position - transform.position;
             var targetRot = Quaternion.LookRotation(dir, Vector3.up);
+            var euler = targetRot.eulerAngles;
+            var currentEuler = transform.rotation.eulerAngles;
+            var finalVector = new Vector3(currentEuler.x, euler.y, currentEuler.z);
+            targetRot = Quaternion.Euler(finalVector);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
         }
 
