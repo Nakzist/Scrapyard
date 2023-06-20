@@ -11,5 +11,7 @@
 
         public const string OnWeaponChanged = "OnWeaponChanged";
         public const string OnBulletChange = "OnBulletChange";
+        
+        public const string WeaponSelected = "WeaponSelected";
     }
 }

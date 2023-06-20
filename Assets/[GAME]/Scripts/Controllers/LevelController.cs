@@ -63,16 +63,7 @@ namespace _GAME_.Scripts.Controllers
                 AddCurrency(2);
             
             //create hud for crafting
-            IncreaseCurrentWinCondition();
 
-            var parent = transform.GetChild(2);
-            _spawnPoints = new List<Transform>();
-            _aliveEnemies = new List<GameObject>();
-            
-            foreach (Transform child in parent)
-            {
-                _spawnPoints.Add(child);
-            }
         }
 
         private void Update()
@@ -95,11 +86,13 @@ namespace _GAME_.Scripts.Controllers
         private void OnEnable()
         {
             Register(CustomEvents.IncreaseSCore, IncreaseScore);
+            Register(CustomEvents.WeaponSelected, AfterWeaponSelect);
         }
 
         private void OnDisable()
         {
             Unregister(CustomEvents.IncreaseSCore, IncreaseScore);
+            Unregister(CustomEvents.WeaponSelected, AfterWeaponSelect);
         }
 
         #endregion
@@ -115,6 +108,20 @@ namespace _GAME_.Scripts.Controllers
                 var enemyIndex = Random.Range(0, _currentLevel.enemiesToSpawn.Count);
                 var enemy = Instantiate(_currentLevel.enemiesToSpawn[enemyIndex], _spawnPoints[spawnPointIndex].position, Quaternion.identity);
                 if (enemy != null) _aliveEnemies.Add(enemy);
+            }
+        }
+
+        private void AfterWeaponSelect()
+        {
+            IncreaseCurrentWinCondition();
+
+            var parent = transform.GetChild(2);
+            _spawnPoints = new List<Transform>();
+            _aliveEnemies = new List<GameObject>();
+            
+            foreach (Transform child in parent)
+            {
+                _spawnPoints.Add(child);
             }
         }
 

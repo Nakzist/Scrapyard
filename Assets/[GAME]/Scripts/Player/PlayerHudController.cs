@@ -28,7 +28,7 @@ namespace _GAME_.Scripts.Player
 
         private void Start()
         {
-            GetReferences();
+            //GetReferences();
         }
 
         #region Observer 
@@ -39,6 +39,7 @@ namespace _GAME_.Scripts.Player
             Register(CustomEvents.OnHealthChanged, ShowHp);
             Register(CustomEvents.OnWeaponChanged, WeaponChange);
             Register(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
+            Register(CustomEvents.WeaponSelected, GetReferences);
         }
 
         private void OnDisable()
@@ -47,6 +48,7 @@ namespace _GAME_.Scripts.Player
             Unregister(CustomEvents.OnHealthChanged, ShowHp);
             Unregister(CustomEvents.OnWeaponChanged, WeaponChange);
             Unregister(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
+            Unregister(CustomEvents.WeaponSelected, GetReferences);
         }
 
         #endregion

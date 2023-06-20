@@ -359,6 +359,12 @@ namespace _GAME_.Scripts.Player
         {
             _currentBulletCount += value;
         }
+
+        public void AddWeapon(BaseRangedWeaponScriptableObject ranged, BaseCloseCombatWeaponScriptableObject close)
+        {
+            ChangeRangedWeapon(ranged);
+            ChangeCloseCombatWeapon(close);
+        }
         
         #endregion
     }
