@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using _GAME_.Scripts.Managers;
 using UnityEngine;
 
@@ -42,6 +43,17 @@ namespace _GAME_.Scripts.Player
             PlayerMovementController = GetComponent<PlayerMovementController>();
             PlayerWeaponController = GetComponent<PlayerWeaponController>();
             PlayerHudController = GetComponent<PlayerHudController>();
+
+            //GameManager.Instance.currentPlayer = this;
+            StartCoroutine(SetPlayer());
+        }
+
+        private IEnumerator SetPlayer()
+        {
+            while (GameManager.Instance == null)
+            {
+                yield return null;
+            }
 
             GameManager.Instance.currentPlayer = this;
         }

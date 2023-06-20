@@ -18,6 +18,7 @@ namespace _GAME_.Scripts.Player
         private TextMeshProUGUI _hpText;
         private GameObject _losePanel;
         private List<Sprite> _waveSprites;
+        private TextMeshProUGUI _ammoText;
 
         private PlayerHudDataScriptableObject _playerHudDataScriptableObject;
 
@@ -30,17 +31,25 @@ namespace _GAME_.Scripts.Player
             GetReferences();
         }
 
+        #region Observer 
+
         private void OnEnable()
         {
             Register(CustomEvents.OnPlayerDeath, ShowLosePanel);
             Register(CustomEvents.OnHealthChanged, ShowHp);
+            Register(CustomEvents.OnWeaponChanged, WeaponChange);
+            Register(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
         }
 
         private void OnDisable()
         {
             Unregister(CustomEvents.OnPlayerDeath, ShowLosePanel);
             Unregister(CustomEvents.OnHealthChanged, ShowHp);
+            Unregister(CustomEvents.OnWeaponChanged, WeaponChange);
+            Unregister(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
         }
+
+        #endregion
 
         #endregion
         
@@ -65,6 +74,8 @@ namespace _GAME_.Scripts.Player
             _hpText = _hudInstance.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
             
             _losePanel = _hudInstance.transform.GetChild(0).GetChild(4).gameObject;
+            
+            _ammoText = _hudInstance.transform.GetChild(0).GetChild(6).GetComponent<TextMeshProUGUI>();
 
             var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
             image.sprite = _waveSprites[GameManager.Instance.currentLevel];
@@ -80,6 +91,9 @@ namespace _GAME_.Scripts.Player
         {
             if (GameManager.Instance.currentPlayer == null)
             {
+                if(_hpText == null)
+                    return;
+                
                 _hpText.text = "100";
             }
             else
@@ -87,6 +101,16 @@ namespace _GAME_.Scripts.Player
                 var currentHealth = GameManager.Instance.currentPlayer.PlayerHealthManager.Health;
                 _hpText.text = currentHealth.ToString("F0");
             }
+        }
+
+        private void WeaponChange()
+        {
+            _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
+        }
+        
+        private void UpdateWeaponAmmo()
+        {
+            _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
         }
 
         #endregion

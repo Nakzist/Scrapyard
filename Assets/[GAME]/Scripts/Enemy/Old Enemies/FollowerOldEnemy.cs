@@ -22,6 +22,9 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         private void Update()
         {
             _velocity = Vector3.zero;
+            
+            if(GameManager.Instance == null || GameManager.Instance.currentPlayer == null) return;
+            
             if (Vector3.Distance(GameManager.Instance.currentPlayer.transform.position, transform.position) <= range && LastAttackTime + delayBetweenAttacks <= Time.time)
             {
                 StartCoroutine(Attack());
@@ -46,20 +49,22 @@ namespace _GAME_.Scripts.Enemy.Old_Enemies
         {
             CanMove = false;
             LastAttackTime = Time.time;
-            GameManager.Instance.currentPlayer.GetComponent<PlayerHealthManager>().TakeDamage(damage, DamageType.Melee);
+            GameManager.Instance.currentPlayer.GetComponent<PlayerHealthManager>().TakeDamage(damage, DamageType.Melee, DamageCauser.Enemy);
             yield return new WaitForSeconds(1f);
             CanMove = true;
         }
         
-        private protected override void EnemyDeath()
+        private protected override void EnemyDeath(DamageCauser damageCauser)
         {
             GameManager.Instance.aliveEnemies.Remove(gameObject);
+            
             if (isQueen)
             {
                 Push(CustomEvents.OnQueenDeath);
             }
-            Push(CustomEvents.OnEnemyDeath);
-            Debug.Log("die");
+            if(damageCauser == DamageCauser.Player)
+                Push(CustomEvents.OnEnemyDeath);
+            
             Destroy(gameObject);
         }
 

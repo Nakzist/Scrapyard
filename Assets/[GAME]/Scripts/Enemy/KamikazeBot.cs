@@ -89,7 +89,7 @@ namespace _GAME_.Scripts.Enemy
             foreach (var col in colliders)
             {
                 var damageable = col.GetComponent<IDamageable>();
-                damageable?.TakeDamage(_explosionDamage, DamageType.Melee);
+                damageable?.TakeDamage(_explosionDamage, DamageType.Melee, DamageCauser.Enemy);
             }
             
             GameManager.Instance.aliveEnemies.Remove(gameObject);
