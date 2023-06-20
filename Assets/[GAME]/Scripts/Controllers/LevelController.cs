@@ -72,7 +72,6 @@ namespace _GAME_.Scripts.Controllers
             
             //create hud for crafting
             Instantiate(craftHud);
-
         }
 
         private void Update()
