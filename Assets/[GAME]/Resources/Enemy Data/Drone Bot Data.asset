@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a38352117e462992d3235dd9e77e99, type: 3}
   m_Name: Drone Bot Data
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 6
   angularSpeed: 720
   acceleration: 8
   rotationSpeed: 10

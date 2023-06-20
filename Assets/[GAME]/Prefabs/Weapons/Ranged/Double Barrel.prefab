@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6800424047171026559}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8515828289018106919}
   - component: {fileID: 6535144098679375189}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,9 +84,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3060590680633229496, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
-  - {fileID: -114096980323844866, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
-  - {fileID: -2293238839597214331, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: -114096980323844866, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5273879995152399357}
   - component: {fileID: 5067921974697347793}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Double Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ Transform:
   - {fileID: 779423776378493760}
   - {fileID: 5752989907697633446}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &5067921974697347793
 Animation:
@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2424796178527552016}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8682951208607304467}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5752989907697633446}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: double_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2494504500059190425}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779423776378493760}
   - component: {fileID: 5930215065882529781}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,9 +352,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2293238839597214331, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
-  - {fileID: -5899304328823496567, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
-  - {fileID: -7908028259305023846, guid: 1cc95f9a7e68f0244b8d53d34fb0f8b2, type: 3}
+  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: -5899304328823496567, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
+  - {fileID: 3060590680633229496, guid: 1e5e8ffacf5c647a0ba05ac909cd5909, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

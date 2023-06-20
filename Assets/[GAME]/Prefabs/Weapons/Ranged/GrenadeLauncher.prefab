@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3501134023957145620}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7269133636704841188}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4570822786553370810}
   - component: {fileID: 1683217704990945583}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5899304328823496567, guid: 1e7c4f6a9afa306468ab14ff9968e12b, type: 3}
+  - {fileID: -5899304328823496567, guid: dff946302394e41f9b396a3cc51264be, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2180186620201327761}
   - component: {fileID: 1080956949287608985}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GrenadeLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076185324219678932}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5523530677769352509}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade_launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1583621471818698697}
   - component: {fileID: 8057403243145128799}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,9 +318,9 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -2293238839597214331, guid: 1e7c4f6a9afa306468ab14ff9968e12b, type: 3}
-  - {fileID: -114096980323844866, guid: 1e7c4f6a9afa306468ab14ff9968e12b, type: 3}
-  - {fileID: -7908028259305023846, guid: 1e7c4f6a9afa306468ab14ff9968e12b, type: 3}
-  - {fileID: 3060590680633229496, guid: 1e7c4f6a9afa306468ab14ff9968e12b, type: 3}
+  - {fileID: 3060590680633229496, guid: dff946302394e41f9b396a3cc51264be, type: 3}
+  - {fileID: 3060590680633229496, guid: dff946302394e41f9b396a3cc51264be, type: 3}
+  - {fileID: 3060590680633229496, guid: dff946302394e41f9b396a3cc51264be, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

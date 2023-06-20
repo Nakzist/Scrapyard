@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 // ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace _GAME_.Scripts.Player

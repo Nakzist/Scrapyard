@@ -28,7 +28,7 @@ namespace _GAME_.Scripts.Player
 
         private void Start()
         {
-            GetReferences();
+            //GetReferences();
         }
 
         #region Observer 
@@ -39,6 +39,7 @@ namespace _GAME_.Scripts.Player
             Register(CustomEvents.OnHealthChanged, ShowHp);
             Register(CustomEvents.OnWeaponChanged, WeaponChange);
             Register(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
+            Register(CustomEvents.WeaponSelected, GetReferences);
         }
 
         private void OnDisable()
@@ -47,6 +48,7 @@ namespace _GAME_.Scripts.Player
             Unregister(CustomEvents.OnHealthChanged, ShowHp);
             Unregister(CustomEvents.OnWeaponChanged, WeaponChange);
             Unregister(CustomEvents.OnBulletChange, UpdateWeaponAmmo);
+            Unregister(CustomEvents.WeaponSelected, GetReferences);
         }
 
         #endregion
@@ -78,8 +80,12 @@ namespace _GAME_.Scripts.Player
             _ammoText = _hudInstance.transform.GetChild(0).GetChild(6).GetComponent<TextMeshProUGUI>();
 
             var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
-            image.sprite = _waveSprites[GameManager.Instance.currentLevel];
+            if(_waveSprites.Count > GameManager.Instance.currentLevel)
+                image.sprite = _waveSprites[GameManager.Instance.currentLevel];
             image.gameObject.SetActive(true);
+            
+            WeaponChange();
+            UpdateWeaponAmmo();
         }
 
         private void ShowLosePanel()
@@ -89,6 +95,9 @@ namespace _GAME_.Scripts.Player
 
         private void ShowHp()
         {
+            if(GameManager.Instance == null)
+                return;
+            
             if (GameManager.Instance.currentPlayer == null)
             {
                 if(_hpText == null)
@@ -105,11 +114,13 @@ namespace _GAME_.Scripts.Player
 
         private void WeaponChange()
         {
+            if (_ammoText == null) return;
             _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
         }
         
         private void UpdateWeaponAmmo()
         {
+            if (_ammoText == null) return;
             _ammoText.text = GameManager.Instance.currentPlayer.PlayerWeaponController.GetCurrentAmmoText();
         }
 

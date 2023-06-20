@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6190136525262400225}
   - component: {fileID: 8921082205493322406}
   - component: {fileID: 8144965181834452183}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Katana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8921082205493322406
 MeshFilter:
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203306257127885995}
-  m_Mesh: {fileID: 3130136586863378857, guid: 444d0930372e20b4c9614952e1a99ee1, type: 3}
+  m_Mesh: {fileID: 3680027719181775668, guid: 430200ec69a7047a8800291ef10df1b0, type: 3}
 --- !u!23 &8144965181834452183
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,9 +61,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7531830856840429345, guid: 444d0930372e20b4c9614952e1a99ee1, type: 3}
-  - {fileID: -3385358052453479921, guid: 444d0930372e20b4c9614952e1a99ee1, type: 3}
-  - {fileID: 7877324189456045734, guid: 444d0930372e20b4c9614952e1a99ee1, type: 3}
+  - {fileID: -6922793697723135513, guid: 430200ec69a7047a8800291ef10df1b0, type: 3}
+  - {fileID: -7531830856840429345, guid: 430200ec69a7047a8800291ef10df1b0, type: 3}
+  - {fileID: 7877324189456045734, guid: 430200ec69a7047a8800291ef10df1b0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

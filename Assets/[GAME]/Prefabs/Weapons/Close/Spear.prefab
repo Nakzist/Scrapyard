@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4197276349208854674}
   - component: {fileID: 1025060523078074810}
   - component: {fileID: 2630773670127707252}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3759911192363309227}
-  m_Mesh: {fileID: -6396304648370059911, guid: e7ca52f1f3fef3142904dd4cb4acd2cf, type: 3}
+  m_Mesh: {fileID: -6396304648370059911, guid: c7da828039a794a369a3bc3ee28bd6ea, type: 3}
 --- !u!23 &2630773670127707252
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,9 +61,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2295699958525706655, guid: e7ca52f1f3fef3142904dd4cb4acd2cf, type: 3}
-  - {fileID: -7908028259305023846, guid: e7ca52f1f3fef3142904dd4cb4acd2cf, type: 3}
-  - {fileID: 3060590680633229496, guid: e7ca52f1f3fef3142904dd4cb4acd2cf, type: 3}
+  - {fileID: 2295699958525706655, guid: c7da828039a794a369a3bc3ee28bd6ea, type: 3}
+  - {fileID: 3060590680633229496, guid: c7da828039a794a369a3bc3ee28bd6ea, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

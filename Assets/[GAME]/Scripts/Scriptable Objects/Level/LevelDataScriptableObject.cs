@@ -18,8 +18,11 @@ namespace _GAME_.Scripts.Scriptable_Objects.Level
     {
         public List<GameObject> enemiesToSpawn;
         public float spawnRate;
-        public float timeToSurvive;
-        public float winScore;
-        public WinConditions winCondition;
+        public WinConditions winCondition1;
+        public float winCondition1Value;
+        public WinConditions winCondition2;
+        public float winCondition2Value;
+        public WinConditions winCondition3;
+        public float winCondition3Value;
     }
 }

@@ -23,6 +23,6 @@ MonoBehaviour:
   attackAngle: 60
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   enemyToSpawn: 2
   enemyPrefab: {fileID: 4519557190363625241, guid: 97a0daec87aa30840bb529a311eab134, type: 3}

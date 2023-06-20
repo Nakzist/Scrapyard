@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
@@ -8,7 +7,6 @@ using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Close_Combat_Weapons;
 using _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Ranged_Weapons;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Player
 {
@@ -29,6 +27,8 @@ namespace _GAME_.Scripts.Player
         [SerializeField] private bool addCloseRangeWeapon;
         [SerializeField] private BaseCloseCombatWeaponScriptableObject closeRangeWeaponToAdd;
 
+        [SerializeField] private AudioClip shootSoundClip;
+
         #endregion
 
         #region Private Variables
@@ -37,11 +37,14 @@ namespace _GAME_.Scripts.Player
 
         private GameObject _rangedWeaponGameObject;
         private float _currentAmmo;
+        private float _currentBulletCount;
         private RangedWeapon _currentRangedWeapon;
         private Transform _bulletSpawnPoint;
 
         private float _lastTimeShot;
         private bool _isReloading;
+
+        private AudioSource _audioSource;
 
         #endregion
 
@@ -92,6 +95,7 @@ namespace _GAME_.Scripts.Player
             _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
             _animator.runtimeAnimatorController = _animatorOverrideController;
             
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -173,7 +177,8 @@ namespace _GAME_.Scripts.Player
             _animator.SetFloat(ShootSpeedMultiplier, shootSpeedMultiplier);
             _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
 
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            _currentAmmo = _currentRangedWeapon.magSize;
+            _currentBulletCount = _currentRangedWeapon.bulletCount;
             
             Push(CustomEvents.OnWeaponChanged);
         }
@@ -211,6 +216,8 @@ namespace _GAME_.Scripts.Player
             _animator.SetTrigger(ShootingTrigger);
             _currentAmmo--;
             Push(CustomEvents.OnBulletChange);
+            
+            _audioSource.PlayOneShot(shootSoundClip);
 
             var shootingDirection = _mainCamera.transform.forward;
             
@@ -236,8 +243,9 @@ namespace _GAME_.Scripts.Player
         {
             if (_playerInputHandler.IsReloading)
             {
+                if (_currentBulletCount <= 0) return;
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (_currentAmmo == _currentRangedWeapon.maxAmmo || _isReloading) return;
+                if (_currentAmmo == _currentRangedWeapon.magSize || _isReloading) return;
                 
                 StartCoroutine(ReloadWeapon());
             }
@@ -250,7 +258,11 @@ namespace _GAME_.Scripts.Player
             _animator.SetTrigger(ReloadTrigger);
             _isReloading = true;
             yield return new WaitForSeconds(_currentRangedWeapon.reloadTime);
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            var bulletToAdd = _currentBulletCount - _currentRangedWeapon.magSize;
+            var magAmmoCount = _currentAmmo;
+            bulletToAdd = bulletToAdd < 0 ? _currentBulletCount : _currentRangedWeapon.magSize;
+            _currentAmmo = bulletToAdd;
+            _currentBulletCount -= (bulletToAdd - magAmmoCount);
             _isReloading = false;
             Push(CustomEvents.OnBulletChange);
         }
@@ -323,7 +335,7 @@ namespace _GAME_.Scripts.Player
 
         public string GetCurrentAmmoText()
         {
-            return $"{_currentAmmo} / {_currentRangedWeapon.maxAmmo}";
+            return $"{_currentAmmo} / {_currentBulletCount}";
         }
 
         public void GiveMeleeDamageBoost()
@@ -349,6 +361,18 @@ namespace _GAME_.Scripts.Player
         public void ResetCloseRangeKillCount()
         {
             _closeRangeEnemyKillCount = 0;
+        }
+
+        public void IncreaseBullet(float value)
+        {
+            _currentBulletCount += value;
+            Push(CustomEvents.OnBulletChange);
+        }
+
+        public void AddWeapon(BaseRangedWeaponScriptableObject ranged, BaseCloseCombatWeaponScriptableObject close)
+        {
+            ChangeRangedWeapon(ranged);
+            ChangeCloseCombatWeapon(close);
         }
         
         #endregion
