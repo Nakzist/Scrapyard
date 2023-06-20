@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Interfaces;
@@ -8,7 +7,6 @@ using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Close_Combat_Weapons;
 using _GAME_.Scripts.Scriptable_Objects.Player.Weapon.Ranged_Weapons;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.Player
 {
@@ -37,6 +35,7 @@ namespace _GAME_.Scripts.Player
 
         private GameObject _rangedWeaponGameObject;
         private float _currentAmmo;
+        private float _currentBulletCount;
         private RangedWeapon _currentRangedWeapon;
         private Transform _bulletSpawnPoint;
 
@@ -173,7 +172,7 @@ namespace _GAME_.Scripts.Player
             _animator.SetFloat(ShootSpeedMultiplier, shootSpeedMultiplier);
             _animator.SetFloat(ReloadSpeedMultiplier, reloadSpeedMultiplier);
 
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            _currentAmmo = _currentRangedWeapon.magSize;
             
             Push(CustomEvents.OnWeaponChanged);
         }
@@ -236,8 +235,9 @@ namespace _GAME_.Scripts.Player
         {
             if (_playerInputHandler.IsReloading)
             {
+                if (_currentBulletCount <= 0) return;
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (_currentAmmo == _currentRangedWeapon.maxAmmo || _isReloading) return;
+                if (_currentAmmo == _currentRangedWeapon.magSize || _isReloading) return;
                 
                 StartCoroutine(ReloadWeapon());
             }
@@ -250,7 +250,11 @@ namespace _GAME_.Scripts.Player
             _animator.SetTrigger(ReloadTrigger);
             _isReloading = true;
             yield return new WaitForSeconds(_currentRangedWeapon.reloadTime);
-            _currentAmmo = _currentRangedWeapon.maxAmmo;
+            var bulletToAdd = _currentBulletCount - _currentRangedWeapon.magSize;
+            if(bulletToAdd < 0)
+                bulletToAdd = _currentBulletCount;
+            _currentAmmo = bulletToAdd;
+            _currentBulletCount -= bulletToAdd;
             _isReloading = false;
             Push(CustomEvents.OnBulletChange);
         }
@@ -323,7 +327,7 @@ namespace _GAME_.Scripts.Player
 
         public string GetCurrentAmmoText()
         {
-            return $"{_currentAmmo} / {_currentRangedWeapon.maxAmmo}";
+            return $"{_currentAmmo} / {_currentRangedWeapon.bulletCount}";
         }
 
         public void GiveMeleeDamageBoost()
@@ -349,6 +353,11 @@ namespace _GAME_.Scripts.Player
         public void ResetCloseRangeKillCount()
         {
             _closeRangeEnemyKillCount = 0;
+        }
+
+        public void IncreaseBullet(float value)
+        {
+            _currentBulletCount += value;
         }
         
         #endregion

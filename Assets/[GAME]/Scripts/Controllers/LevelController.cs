@@ -6,6 +6,7 @@ using _GAME_.Scripts.Observer;
 using _GAME_.Scripts.Scriptable_Objects.Level;
 using UnityEngine;
 using static _GAME_.Scripts.Currency.Currency;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace _GAME_.Scripts.Controllers
@@ -20,9 +21,39 @@ namespace _GAME_.Scripts.Controllers
         private List<Transform> _spawnPoints;
         private Level _currentLevel;
 
+        private WinConditions _currentWinCondition;
+        private float _currentWinConditionTargetValue;
+        private int _currentWinConditionIndex;
+
         #endregion
 
         #region Monobehaviour Methods
+
+        private void IncreaseCurrentWinCondition()
+        {
+            _currentWinConditionIndex++;
+            GameManager.Instance.score = 0;
+
+            switch (_currentWinConditionIndex)
+            {
+                case 1:
+                    _currentWinCondition = _currentLevel.winCondition1;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition1Value;
+                    break;
+                case 2:
+                    _currentWinCondition = _currentLevel.winCondition2;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition2Value;
+                    break;
+                case 3:
+                    _currentWinCondition = _currentLevel.winCondition3;
+                    _currentWinConditionTargetValue = _currentLevel.winCondition3Value;
+                    break;
+                case 4:
+                    AddCurrency(2); //Add 2 currency for winning
+                    GameManager.Instance.Win();
+                    break;
+            }
+        }
 
         private void Start()
         {            
@@ -32,6 +63,7 @@ namespace _GAME_.Scripts.Controllers
                 AddCurrency(2);
             
             //create hud for crafting
+            IncreaseCurrentWinCondition();
 
             var parent = transform.GetChild(2);
             _spawnPoints = new List<Transform>();
@@ -46,17 +78,16 @@ namespace _GAME_.Scripts.Controllers
         private void Update()
         {
             if (_currentLevel.enemiesToSpawn.Count >0)
-            {
                 SpawnEnemy();
-            }
-            if (_currentLevel.winCondition == WinConditions.Time)
+            
+            if (_currentWinCondition == WinConditions.Time)
             {
-                _currentLevel.timeToSurvive -= Time.deltaTime;
-                GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText(Mathf.Ceil(_currentLevel.timeToSurvive) + " seconds left to win");
+                _currentWinConditionTargetValue -= Time.deltaTime;
+                GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText(Mathf.Ceil(_currentWinConditionTargetValue) + " seconds left to win");
                 //winConditionText.text = Mathf.Ceil(timeToSurvive) + " seconds left to win";
-                if (_currentLevel.timeToSurvive <= 0)
+                if (_currentWinConditionTargetValue <= 0)
                 {
-                    GameManager.Instance.Win();
+                    IncreaseCurrentWinCondition();
                 }
             }
         }
@@ -89,14 +120,13 @@ namespace _GAME_.Scripts.Controllers
 
         private void IncreaseScore()
         {
-            if (_currentLevel.winCondition == WinConditions.Score)
+            if (_currentWinCondition == WinConditions.Score)
             {
-                GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText($"{GameManager.Instance.score} / {_currentLevel.winScore}");
+                GameManager.Instance.currentPlayer.PlayerHudController.UpdateWinConditionText($"{GameManager.Instance.score} / {_currentWinConditionTargetValue}");
             }
-            if (GameManager.Instance.score >= _currentLevel.winScore)
+            if (GameManager.Instance.score >= _currentWinConditionTargetValue)
             {
-                AddCurrency(2); //Add 2 currency for winning
-                GameManager.Instance.Win();
+                IncreaseCurrentWinCondition();
             }
         }
         

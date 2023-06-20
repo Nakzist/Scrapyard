@@ -21,4 +21,4 @@ MonoBehaviour:
   damage: 5
   explosionRadius: 20
   explosionDamage: 50
-  explosionDelay: 5
+  explosionDelay: 1
