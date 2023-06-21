@@ -19,6 +19,6 @@ MonoBehaviour:
   maxHealth: 10
   attackRange: 10
   damage: 5
-  explosionRadius: 8
-  explosionDamage: 40
+  explosionRadius: 6
+  explosionDamage: 30
   explosionDelay: 1

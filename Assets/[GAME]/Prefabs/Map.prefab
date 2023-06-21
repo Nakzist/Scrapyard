@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftHud: {fileID: 3194466176959297327, guid: d77af135960da2d40bcd2cd0503ce501, type: 3}
-  _levelIndex: 0
+  levelIndex: 0
 --- !u!82 &8508994085947539639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -727,6 +727,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9c43590a5ac65f943bcc05ec732291a4, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9c43590a5ac65f943bcc05ec732291a4, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

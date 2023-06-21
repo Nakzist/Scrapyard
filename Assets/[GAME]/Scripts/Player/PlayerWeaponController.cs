@@ -211,28 +211,45 @@ namespace _GAME_.Scripts.Player
         // ReSharper disable Unity.PerformanceAnalysis
         private void HandleShoot()
         {
-            var currentBullet = Instantiate(_currentRangedWeapon.bulletPrefab, _bulletSpawnPoint.position, Quaternion.identity);
+            //var currentBullet = Instantiate(_currentRangedWeapon.bulletPrefab, _bulletSpawnPoint.position, Quaternion.identity);
             _lastTimeShot = Time.time;
             _animator.SetTrigger(ShootingTrigger);
             _currentAmmo--;
             Push(CustomEvents.OnBulletChange);
             
             _audioSource.PlayOneShot(shootSoundClip);
-
-            var shootingDirection = _mainCamera.transform.forward;
             
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out var hit,
-                    _currentRangedWeapon.weaponRange, _currentRangedWeapon.hittableLayerMask))
+                    Mathf.Infinity, _currentRangedWeapon.hittableLayerMask))
             {
-                if (hit.transform.TryGetComponent(out IDamageable damageable))
+                if (_currentRangedWeapon.weapon == RangedWeaponsEnum.GrenadeLauncher)
                 {
-                    damageable.TakeDamage(_currentRangedWeapon.weaponDamage, DamageType.Ranged, DamageCauser.Player);
+                    // ReSharper disable once Unity.PreferNonAllocApi
+                    var colliders = Physics.OverlapSphere(hit.transform.position, 10f,
+                        _currentRangedWeapon.hittableLayerMask);
+                    
+                    foreach (var col in colliders)
+                    {
+                        if (col.transform.TryGetComponent(out IDamageable damageable))
+                        {
+                            damageable.TakeDamage(_currentRangedWeapon.weaponDamage, DamageType.Ranged, DamageCauser.Player);
+                        }
+                    }
                 }
+                else
+                {
+
+                    if (hit.transform.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(_currentRangedWeapon.weaponDamage, DamageType.Ranged, DamageCauser.Player);
+                    }
+                }
+
                 
-                shootingDirection = (hit.point - _bulletSpawnPoint.position).normalized;
+                //shootingDirection = (hit.point - _bulletSpawnPoint.position).normalized;
             }
             
-            currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _currentRangedWeapon.bulletSpeed;
+            //currentBullet.GetComponent<Rigidbody>().velocity = shootingDirection * _currentRangedWeapon.bulletSpeed;
         }
 
         #endregion

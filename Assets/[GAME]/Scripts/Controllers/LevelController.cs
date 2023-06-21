@@ -33,7 +33,7 @@ namespace _GAME_.Scripts.Controllers
         #region Serialized Variables
 
         [FormerlySerializedAs("_craftHud")] [SerializeField] private GameObject craftHud;
-        [SerializeField] private int _levelIndex;
+        [FormerlySerializedAs("_levelIndex")] [SerializeField] private int levelIndex;
 
         #endregion
 
@@ -180,7 +180,7 @@ namespace _GAME_.Scripts.Controllers
                 manager.AddComponent<GameManager>();
             }
 
-            GameManager.Instance.currentLevel = _levelIndex;
+            GameManager.Instance.currentLevel = levelIndex;
             GameManager.Instance.score = 0;
             
             _currentLevel = levelDataScriptableObject.Levels[(GameManager.Instance.currentLevel - 1)];

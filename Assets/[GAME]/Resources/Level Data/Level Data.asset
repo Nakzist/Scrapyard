@@ -21,11 +21,11 @@ MonoBehaviour:
     - {fileID: 3081716943867929778, guid: 1904ee8e375196542990248659939c85, type: 3}
     spawnRate: 1
     winCondition1: 0
-    winCondition1Value: 10
+    winCondition1Value: 5
     winCondition2: 1
-    winCondition2Value: 30
+    winCondition2Value: 10
     winCondition3: 0
-    winCondition3Value: 10
+    winCondition3Value: 5
   - enemiesToSpawn:
     - {fileID: 3104713380817587402, guid: 2083e062a80d8df429553fd5cb4c8ee6, type: 3}
     - {fileID: 6472793549743410360, guid: f6a567184f49cb24f803087544dca808, type: 3}
@@ -34,11 +34,11 @@ MonoBehaviour:
     - {fileID: 3081716943867929778, guid: 1904ee8e375196542990248659939c85, type: 3}
     spawnRate: 2.5
     winCondition1: 0
-    winCondition1Value: 20
+    winCondition1Value: 7
     winCondition2: 1
-    winCondition2Value: 30
+    winCondition2Value: 10
     winCondition3: 0
-    winCondition3Value: 30
+    winCondition3Value: 10
   - enemiesToSpawn:
     - {fileID: 3104713380817587402, guid: 2083e062a80d8df429553fd5cb4c8ee6, type: 3}
     - {fileID: 6472793549743410360, guid: f6a567184f49cb24f803087544dca808, type: 3}
@@ -47,24 +47,24 @@ MonoBehaviour:
     - {fileID: 3081716943867929778, guid: 1904ee8e375196542990248659939c85, type: 3}
     spawnRate: 3
     winCondition1: 0
-    winCondition1Value: 30
+    winCondition1Value: 10
     winCondition2: 1
-    winCondition2Value: 45
+    winCondition2Value: 15
+    winCondition3: 0
+    winCondition3Value: 15
+  - enemiesToSpawn:
+    - {fileID: 3104713380817587402, guid: 2083e062a80d8df429553fd5cb4c8ee6, type: 3}
+    - {fileID: 6472793549743410360, guid: f6a567184f49cb24f803087544dca808, type: 3}
+    - {fileID: 4062059585111598317, guid: eb5de6a1537064446a6ea6e9cf2aad81, type: 3}
+    - {fileID: 2376231280656956480, guid: a7038b7934eaf6b4aa00816190abe455, type: 3}
+    - {fileID: 3081716943867929778, guid: 1904ee8e375196542990248659939c85, type: 3}
+    spawnRate: 3
+    winCondition1: 0
+    winCondition1Value: 15
+    winCondition2: 0
+    winCondition2Value: 20
     winCondition3: 0
     winCondition3Value: 20
-  - enemiesToSpawn:
-    - {fileID: 3104713380817587402, guid: 2083e062a80d8df429553fd5cb4c8ee6, type: 3}
-    - {fileID: 6472793549743410360, guid: f6a567184f49cb24f803087544dca808, type: 3}
-    - {fileID: 4062059585111598317, guid: eb5de6a1537064446a6ea6e9cf2aad81, type: 3}
-    - {fileID: 2376231280656956480, guid: a7038b7934eaf6b4aa00816190abe455, type: 3}
-    - {fileID: 3081716943867929778, guid: 1904ee8e375196542990248659939c85, type: 3}
-    spawnRate: 3
-    winCondition1: 0
-    winCondition1Value: 50
-    winCondition2: 0
-    winCondition2Value: 45
-    winCondition3: 0
-    winCondition3Value: 50
   - enemiesToSpawn:
     - {fileID: 9090042374066181314, guid: ab255a31edc2a3847b79eb3db94df38f, type: 3}
     spawnRate: 1

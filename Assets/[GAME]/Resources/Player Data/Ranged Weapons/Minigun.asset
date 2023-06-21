@@ -29,5 +29,6 @@ MonoBehaviour:
     weaponPositionOffset: {x: -0.00227, y: 0.00013, z: -0.00116}
     weaponRotationOffset: {x: 277.48016, y: 348.5241, z: 297.01276}
     weaponScale: {x: 0.010762333, y: 0.010762341, z: 0.010762337}
+    weapon: 3
     reloadAnimationClip: {fileID: -4760509581090134695, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}
     shootAnimationClip: {fileID: 4250310122934719769, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

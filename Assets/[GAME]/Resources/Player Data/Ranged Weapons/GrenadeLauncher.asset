@@ -25,9 +25,10 @@ MonoBehaviour:
     bulletCount: 24
     hittableLayerMask:
       serializedVersion: 2
-      m_Bits: 192
+      m_Bits: 72
     weaponPositionOffset: {x: 0, y: -0.00307, z: -0.00035}
     weaponRotationOffset: {x: 270, y: 270, z: 0}
     weaponScale: {x: 0.01, y: 0.01, z: 0.01}
+    weapon: 2
     reloadAnimationClip: {fileID: 7339644120185618241, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}
     shootAnimationClip: {fileID: 1473338503818673552, guid: 0b29c637a6c79324fa579ace7d7dda2b, type: 3}

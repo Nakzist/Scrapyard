@@ -22,6 +22,7 @@ namespace _GAME_.Scripts.Models
         public Vector3 weaponPositionOffset;
         public Vector3 weaponRotationOffset;
         public Vector3 weaponScale;
+        public RangedWeaponsEnum weapon;
         
         [Header("Animation Data")]
         public AnimationClip reloadAnimationClip;
