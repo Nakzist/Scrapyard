@@ -1,7 +1,9 @@
-﻿using _GAME_.Scripts.Enums;
+﻿using System;
+using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Scriptable_Objects.Enemy;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,8 +22,11 @@ namespace _GAME_.Scripts.Enemy
         private Animator _anim;
         private static readonly int Rest = Animator.StringToHash("Rest");
         private static readonly int Charge = Animator.StringToHash("Charge");
+        private float _currentHealth;
 
         #endregion
+
+        public static Action<float, float> OnBossTakeDamage;
 
         #region Override Methods
 
@@ -30,6 +35,7 @@ namespace _GAME_.Scripts.Enemy
             base.Start();
             _agent = GetComponent<NavMeshAgent>();
             _anim = GetComponent<Animator>();
+            _currentHealth = Resources.Load<BossScriptableObject>(FolderPaths.BOSS_DATA_PATH).MaxHealth;
             
             GetDataFromScriptable();
         }
@@ -105,6 +111,8 @@ namespace _GAME_.Scripts.Enemy
             if (!_canReceiveDamage) return;
             
             base.TakeDamage(incomingDamage, damageType, damageCauser);
+            _currentHealth -= incomingDamage;
+            OnBossTakeDamage?.Invoke(_currentHealth, Resources.Load<BossScriptableObject>(FolderPaths.BOSS_DATA_PATH).MaxHealth);
         }
 
         #endregion

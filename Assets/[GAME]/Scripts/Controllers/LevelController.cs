@@ -43,8 +43,8 @@ namespace _GAME_.Scripts.Controllers
         {            
             GetLevelData();
             
-            if(GetCurrency() == 0)
-                AddCurrency(2);
+            // if(GetCurrency() == 0)
+            //     AddCurrency(2);
             
             //create hud for crafting
             Instantiate(craftHud);
@@ -132,7 +132,7 @@ namespace _GAME_.Scripts.Controllers
                     _currentWinConditionTargetValue = _currentLevel.winCondition3Value;
                     break;
                 case 4:
-                    AddCurrency(2); //Add 2 currency for winning
+                    AddCurrency(1); //Add 1 currency for winning
                     GameManager.Instance.Win();
                     break;
             }
