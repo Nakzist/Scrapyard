@@ -52,8 +52,8 @@ namespace _GAME_.Scripts.Currency
             
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            
-            
+
+            CheckUnlockedWeapons();
         }
 
         #endregion
@@ -260,6 +260,39 @@ namespace _GAME_.Scripts.Currency
             _currencyText.text = GetCurrency().ToString();
             _closeRangeWeaponText.text = "Close Range: " + _selectedCloseRangeWeapon;
             _rangedWeaponText.text = "Ranged: " + _selectedRangeWeapon;
+        }
+
+        private void CheckUnlockedWeapons()
+        {
+            if (CleaverUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false);
+            }
+
+            if (KanaboUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+            }
+
+            if (SpearUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(3).GetChild(0).gameObject.SetActive(false);
+            }
+
+            if (DoubleBarrelUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false);
+            }
+
+            if (GrenadeLauncherUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+            }
+
+            if (MinigunUnlocked)
+            {
+                gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetChild(2).GetChild(0).gameObject.SetActive(false);
+            }
         }
 
         #endregion
