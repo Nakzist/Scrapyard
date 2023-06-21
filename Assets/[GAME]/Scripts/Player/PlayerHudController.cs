@@ -81,7 +81,7 @@ namespace _GAME_.Scripts.Player
 
             var image = _hudInstance.transform.GetChild(0).GetChild(5).GetComponent<Image>();
             if(_waveSprites.Count > GameManager.Instance.currentLevel)
-                image.sprite = _waveSprites[GameManager.Instance.currentLevel];
+                image.sprite = _waveSprites[GameManager.Instance.currentLevel - 1];
             image.gameObject.SetActive(true);
             
             WeaponChange();

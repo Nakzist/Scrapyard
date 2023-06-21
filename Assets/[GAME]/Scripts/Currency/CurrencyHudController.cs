@@ -76,6 +76,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Cleaver;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
 
             UpdateUI();
@@ -95,6 +96,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Kanabo;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -113,6 +115,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Katana;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -131,6 +134,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedCloseRangeWeapon = CloseRangeWeaponSkill.Spear;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -153,6 +157,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedRangeWeapon = RangedWeaponsEnum.DoubleBarrel;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -171,6 +176,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedRangeWeapon = RangedWeaponsEnum.GrenadeLauncher;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -189,6 +195,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedRangeWeapon = RangedWeaponsEnum.Minigun;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
@@ -207,6 +214,7 @@ namespace _GAME_.Scripts.Currency
             else
             {
                 _selectedRangeWeapon = RangedWeaponsEnum.Revolver;
+                obj.transform.GetChild(0).gameObject.SetActive(false);
             }
             UpdateUI();
         }
